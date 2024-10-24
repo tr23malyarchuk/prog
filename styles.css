@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+h2 {
+    text-align: center; /* Центрування заголовка */
+    margin-top: 20px;
+    color: #34495e;
+}
+
+select, input[type="text"], input[type="number"], button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 90%; /* Збільшено розмір таблиці до 90% */
+    border-collapse: collapse;
+    margin: 20px auto; /* Центрування таблиці */
+    font-size: 18px; /* Збільшено розмір шрифту в таблиці */
+}
+
+th, td {
+    padding: 15px; /* Збільшено padding для комірок */
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+th#emission-volume, td#emission-volume { /* Зробити колонку "Об'єм викидів" ширшою */
+    width: 150px; /* Встановіть ширину за бажанням */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+#fetch-data, #add-data-form {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Зменшені стилі для конкретного select та button */
+.small-select, .small-button {
+    width: 50%; /* Зменшена ширина */
+    padding: 8px; /* Зменшено padding */
+    font-size: 14px; /* Зменшено розмір шрифту */
+    margin: 10px auto; /* Центрування */
+    display: block; /* Встановлення блочного відображення */
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформація про викиди</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Інформація про викиди забруднюючих речовин</h1>
+  
+    <h2 id="add-record-title">Додати новий запис</h2>
+    <form id="add-data-form">
+        <label for="object-name">Назва об'єкту:</label>
+        <select id="object-name" required>
+            <option value="">Оберіть об'єкт</option>
+            <option value="1">Об'єкт 1</option>
+            <option value="2">Об'єкт 2</option>
+            <option value="3">Об'єкт 3</option>
+        </select>
+    
+        <label for="pollutant-name">Назва забруднюючої речовини:</label>
+        <input type="text" id="pollutant-name" placeholder="Назва забруднюючої речовини" required>
+    
+        <label for="emission-volume">Об'єм викидів:</label>
+        <input type="number" id="emission-volume" placeholder="Об'єм викидів" min="0" step="0.01" required>
+    
+        <label for="tax-rate">Ставки податку за викиди:</label>
+        <input type="number" id="tax-rate" placeholder="Ставки податку за викиди" min="0" step="0.01" required>
+    
+        <label for="year">Рік:</label>
+        <input type="number" id="year" placeholder="Рік" min="1900" max="2023" required>
+    
+        <button type="submit">Додати запис</button>
+    </form>
+      
+    <select id="table-select" class="small-select">
+        <option value="water">Скиди забруднюючих речовин у водні об'єкти</option>
+        <option value="air">Викиди в атмосферне повітря</option>
+    </select>
+    <button id="fetch-data" class="small-button">Показати дані</button> 
+    
+
+    <table border="1" id="data-table">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Назва об'єкту</th>
+                <th>Назва забруднюючої речовини</th>
+                <th id="emission-volume">Об'єм викидів</th> <!-- Додано ID -->
+                <th>Ставки податку за викиди</th>
+                <th>Рік</th>
+                <th>Податок</th> <!-- Додано новий стовпець -->
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody id="data-table-body"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
