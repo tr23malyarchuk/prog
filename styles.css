@@ -12,7 +12,7 @@ h1 {
 }
 
 h2 {
-    text-align: center; /* Центрування заголовка */
+    text-align: center;
     margin-top: 20px;
     color: #34495e;
 }
@@ -40,14 +40,14 @@ button:hover {
 }
 
 table {
-    width: 90%; /* Збільшено розмір таблиці до 90% */
+    width: 90%; 
     border-collapse: collapse;
-    margin: 20px auto; /* Центрування таблиці */
-    font-size: 18px; /* Збільшено розмір шрифту в таблиці */
+    margin: 20px auto; 
+    font-size: 18px; 
 }
 
 th, td {
-    padding: 15px; /* Збільшено padding для комірок */
+    padding: 15px; 
     text-align: left;
     border: 1px solid #ddd;
 }
@@ -57,8 +57,8 @@ th {
     color: white;
 }
 
-th#emission-volume, td#emission-volume { /* Зробити колонку "Об'єм викидів" ширшою */
-    width: 150px; /* Встановіть ширину за бажанням */
+th#emission-volume, td#emission-volume { 
+    width: 150px; 
 }
 
 tr:nth-child(even) {
@@ -74,11 +74,10 @@ tr:hover {
     margin: auto;
 }
 
-/* Зменшені стилі для конкретного select та button */
 .small-select, .small-button {
-    width: 50%; /* Зменшена ширина */
-    padding: 8px; /* Зменшено padding */
-    font-size: 14px; /* Зменшено розмір шрифту */
-    margin: 10px auto; /* Центрування */
-    display: block; /* Встановлення блочного відображення */
+    width: 50%; 
+    padding: 8px; 
+    font-size: 14px; 
+    margin: 10px auto; 
+    display: block; 
 }

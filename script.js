@@ -2,7 +2,6 @@ document.getElementById('fetch-data').addEventListener('click', () => {
     const selectedTable = document.getElementById('table-select').value;
     const url = selectedTable === 'water' ? 'http://localhost:3005/data/water' : 'http://localhost:3005/data/air';
     
-    // Завантажуємо дані з сервера та відображаємо їх у таблиці
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -12,14 +11,14 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         })
         .then(data => {
             const tableBody = document.getElementById('data-table');
-            tableBody.innerHTML = ''; // Очищення таблиці перед новими даними
+            tableBody.innerHTML = ''; 
             if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="8" class="error">Дані не знайдені</td></tr>'; // Оновлено на 8
+                tableBody.innerHTML = '<tr><td colspan="8" class="error">Дані не знайдені</td></tr>'; 
             } else {
                 data.forEach(row => {
                     const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
                     const taxRate = selectedTable === 'water' ? parseFloat(row['ставка_за_викиди_в_водойми']) || 0 : parseFloat(row['ставка_за_викиди_в_повітря']) || 0;
-                    const tax = emissionVolume * taxRate; // Обчислення податку
+                    const tax = emissionVolume * taxRate; 
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -42,7 +41,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         })
         .catch(error => {
             const tableBody = document.getElementById('data-table');
-            tableBody.innerHTML = `<tr><td colspan="8" class="error">Помилка при завантаженні даних: ${error.message}</td></tr>`; // Оновлено на 8
+            tableBody.innerHTML = `<tr><td colspan="8" class="error">Помилка при завантаженні даних: ${error.message}</td></tr>`; 
         });
 });
 
@@ -60,7 +59,6 @@ document.getElementById('add-data-form').addEventListener('submit', (event) => {
     const selectedTable = document.getElementById('table-select').value;
     const url = selectedTable === 'water' ? 'http://localhost:3005/data/water' : 'http://localhost:3005/data/air';
 
-    // Відправлення POST-запиту для додавання даних
     fetch(url, {
         method: 'POST',
         headers: {
@@ -76,8 +74,8 @@ document.getElementById('add-data-form').addEventListener('submit', (event) => {
     })
     .then(data => {
         console.log('Дані успішно додано:', data);
-        document.getElementById('fetch-data').click(); // Оновлення таблиці після додавання
-        document.getElementById('add-data-form').reset(); // Скидання полів форми
+        document.getElementById('fetch-data').click(); 
+        document.getElementById('add-data-form').reset(); 
     })
     .catch(error => {
         console.error('Помилка при додаванні даних:', error);
@@ -102,7 +100,7 @@ function addEventListeners() {
             })
             .then(data => {
                 console.log('Дані успішно видалено:', data);
-                document.getElementById('fetch-data').click(); // Оновлення таблиці після видалення
+                document.getElementById('fetch-data').click(); 
             })
             .catch(error => {
                 console.error('Помилка при видаленні даних:', error);
@@ -139,7 +137,7 @@ function addEventListeners() {
             })
             .then(data => {
                 console.log('Дані успішно оновлено:', data);
-                document.getElementById('fetch-data').click(); // Оновлення таблиці після редагування
+                document.getElementById('fetch-data').click(); 
             })
             .catch(error => {
                 console.error('Помилка при редагуванні даних:', error);

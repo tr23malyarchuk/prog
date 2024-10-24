@@ -9,8 +9,8 @@ app.use(express.json());
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'password',
-    database: 'testdb',
+    password: '',
+    database: 'ecolog_new',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -28,50 +28,50 @@ const executeQuery = (res, query, params = []) => {
 };
 
 app.get('/data/water', (req, res) => {
-    const query = 'SELECT * FROM water_emissions';
+    const query = 'SELECT * FROM інфа_про_водойми';
     executeQuery(res, query);
 });
 
 app.get('/data/air', (req, res) => {
-    const query = 'SELECT * FROM air_emissions';
+    const query = 'SELECT * FROM інфа_про_повітря';
     executeQuery(res, query);
 });
 
 app.post('/data/water', (req, res) => {
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
-    const query = 'INSERT INTO water_emissions (id_обєкта, назва_забруд_речовини, обєм_викидів_тонн, ставка_за_викиди_в_водойми, Рік) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO інфа_про_водойми (id_обєкта, назва_забруд_речовини, обєм_викидів_тонн, ставка_за_викиди_в_водойми, Рік) VALUES (?, ?, ?, ?, ?)';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year]);
 });
 
 app.post('/data/air', (req, res) => {
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
-    const query = 'INSERT INTO air_emissions (id_обєкту, назва_забруд_речовини, обєм_викидів_тонн, ставка_за_викиди_в_повітря, Рік) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO інфа_про_повітря (id_обєкту, назва_забруд_речовини, обєм_викидів_тонн, ставка_за_викиди_в_повітря, Рік) VALUES (?, ?, ?, ?, ?)';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year]);
 });
 
 app.delete('/data/water/:id', (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM water_emissions WHERE id = ?';
+    const query = 'DELETE FROM інфа_про_водойми WHERE id = ?';
     executeQuery(res, query, [id]);
 });
 
 app.delete('/data/air/:id', (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM air_emissions WHERE id = ?';
+    const query = 'DELETE FROM інфа_про_повітря WHERE id = ?';
     executeQuery(res, query, [id]);
 });
 
 app.put('/data/water/:id', (req, res) => {
     const { id } = req.params;
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
-    const query = 'UPDATE water_emissions SET id_обєкта = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_водойми = ?, Рік = ? WHERE id = ?';
+    const query = 'UPDATE інфа_про_водойми SET id_обєкта = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_водойми = ?, Рік = ? WHERE id = ?';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year, id]);
 });
 
 app.put('/data/air/:id', (req, res) => {
     const { id } = req.params;
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
-    const query = 'UPDATE air_emissions SET id_обєкту = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_повітря = ?, Рік = ? WHERE id = ?';
+    const query = 'UPDATE інфа_про_повітря SET id_обєкту = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_повітря = ?, Рік = ? WHERE id = ?';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year, id]);
 });
 

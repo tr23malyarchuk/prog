@@ -3,8 +3,8 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Kondratets@222#54',
-    database: 'mydb'
+    password: '',
+    database: 'ecolog_new'
 });
 
 db.connect((err) => {
@@ -20,6 +20,6 @@ db.connect((err) => {
             return;
         }
         console.log('Результати запиту:', results);
-        db.end(); // Завершити підключення
+        db.end(); 
     });
 });
