@@ -31,7 +31,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                 tableBody.innerHTML += '<tr><td colspan="9" class="error">Дані не знайдені</td></tr>'; 
             } else {
                 data.forEach(row => {
-                    const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
+                    const emissionVolume = parseFloat(row['обєм_викидів_тонн']) ? parseFloat(row['обєм_викидів_тонн']).toFixed(14) : '—'; // округлить до 4 знаков
                     const taxRate = selectedTable === 'water' ? parseFloat(row['ставка_за_викиди_в_водойми']) || 0 : parseFloat(row['ставка_за_викиди_в_повітря']) || 0;
                     const tax = emissionVolume * taxRate; 
             
