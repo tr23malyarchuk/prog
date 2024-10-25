@@ -81,3 +81,18 @@ tr:hover {
     margin: 10px auto; 
     display: block; 
 }
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity 0.5s ease-in-out;
+}

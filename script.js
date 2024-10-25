@@ -173,3 +173,71 @@ function addEventListeners() {
         });
     });
 }
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerText = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000); 
+}
+
+document.getElementById('add-data-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    // ... existing code ...
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRecord),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Мережна помилка');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Дані успішно додано:', data);
+        showNotification('Запис успішно додано'); 
+        document.getElementById('fetch-data').click(); 
+        document.getElementById('add-data-form').reset(); 
+    })
+    .catch(error => {
+        console.error('Помилка при додаванні даних:', error);
+    });
+});
+
+function addEventListeners() {
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const id = event.target.getAttribute('data-id');
+            const selectedTable = document.getElementById('table-select').value;
+            const url = selectedTable === 'water' ? `http://localhost:3005/data/water/${id}` : `http://localhost:3005/data/air/${id}`;
+
+            fetch(url, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Мережна помилка');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Дані успішно видалено:', data);
+                showNotification('Запис успішно видалено'); 
+                document.getElementById('fetch-data').click(); 
+            })
+            .catch(error => {
+                console.error('Помилка при видаленні даних:', error);
+            });
+        });
+    });
+}
