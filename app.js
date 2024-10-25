@@ -28,18 +28,12 @@ const executeQuery = (res, query, params = []) => {
 };
 
 app.get('/data/water', (req, res) => {
-    const query = `
-        SELECT w.*, o.назва_обєкту 
-        FROM інфа_про_водойми w 
-        JOIN обєкти o ON w.id_обєкта = o.id_обєкта`;
+    const query = 'SELECT * FROM інфа_про_водойми';
     executeQuery(res, query);
 });
 
 app.get('/data/air', (req, res) => {
-    const query = `
-        SELECT a.*, o.назва_обєкту 
-        FROM інфа_про_повітря a 
-        JOIN обєкти o ON a.id_обєкту = o.id_обєкту`;
+    const query = 'SELECT * FROM інфа_про_повітря';
     executeQuery(res, query);
 });
 
