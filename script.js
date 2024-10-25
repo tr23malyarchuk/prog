@@ -12,8 +12,22 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         .then(data => {
             const tableBody = document.getElementById('data-table');
             tableBody.innerHTML = ''; 
+            
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = `
+                <th>ID</th>
+                <th>${selectedTable === 'water' ? 'ID Об\'єкта' : 'ID Об\'єкту'}</th>
+                <th>Назва Забруднюючої Речовини</th>
+                <th>Об\'єм Викидів (тонн)</th>
+                <th>Ставка Податку</th>
+                <th>Рік</th>
+                <th>Податок</th>
+                <th>Дії</th>
+            `;
+            tableBody.appendChild(headerRow);
+
             if (data.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="8" class="error">Дані не знайдені</td></tr>'; 
+                tableBody.innerHTML += '<tr><td colspan="8" class="error">Дані не знайдені</td></tr>'; 
             } else {
                 data.forEach(row => {
                     const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
@@ -28,7 +42,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                         <td>${emissionVolume || '—'}</td>
                         <td>${taxRate || '—'}</td>
                         <td>${row['Рік'] || '—'}</td>
-                        <td>${tax.toFixed(10) || '—'}</td> <!-- Додано значення податку -->
+                        <td>${tax.toFixed(10) || '—'}</td>
                         <td>
                             <button class="edit-btn" data-id="${row['id']}">Редагувати</button>
                             <button class="delete-btn" data-id="${row['id']}">Видалити</button>

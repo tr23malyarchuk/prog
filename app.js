@@ -10,7 +10,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'ecolog_new',
+    database: 'ecolog',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
