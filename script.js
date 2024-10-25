@@ -34,12 +34,24 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                     const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
                     const taxRate = selectedTable === 'water' ? parseFloat(row['ставка_за_викиди_в_водойми']) || 0 : parseFloat(row['ставка_за_викиди_в_повітря']) || 0;
                     const tax = emissionVolume * taxRate; 
-
+            
                     const tr = document.createElement('tr');
+            
+                    let objectName = '—'; 
+                    if (selectedTable === 'water' && row['id_обєкта']) {
+                        objectName = row['id_обєкта'] === 1 ? 'Рівне' :
+                                     row['id_обєкта'] === 2 ? 'Хмельницьк' :
+                                     row['id_обєкта'] === 3 ? 'Бровари' : '—';
+                    } else if (row['id_обєкту']) {
+                        objectName = row['id_обєкту'] === 1 ? 'Рівне' :
+                                     row['id_обєкту'] === 2 ? 'Хмельницьк' :
+                                     row['id_обєкту'] === 3 ? 'Бровари' : '—';
+                    }
+            
                     tr.innerHTML = `
                         <td>${row['id']}</td>
                         <td>${selectedTable === 'water' ? (row['id_обєкта'] || '—') : (row['id_обєкту'] || '—')}</td>
-                        <td>${row['назва_обєкту'] || '—'}</td>  <!-- Відображення назви об'єкта -->
+                        <td>${objectName}</td>
                         <td>${row['назва_забруд_речовини'] || '—'}</td>
                         <td>${emissionVolume || '—'}</td>
                         <td>${taxRate || '—'}</td>
@@ -53,7 +65,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                     tableBody.appendChild(tr);
                 });
                 addEventListeners();
-            }
+            }            
         })
         .catch(error => {
             const tableBody = document.getElementById('data-table');
