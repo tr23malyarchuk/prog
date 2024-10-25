@@ -139,3 +139,44 @@ tr:hover {
         font-size: 12px; 
     }
 }
+
+/* Centering and Styling Tabs and Forms */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.tab-content {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tax-result {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #444;
+    margin-top: 10px;
+}
+
+.tax-result.success {
+    color: green;
+}
+
+.tax-result.error {
+    color: red;
+}
+
+.active-tab {
+    display: block;
+}
