@@ -73,10 +73,11 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         });
 });
 
-function showNotification(message) {
+function showNotification(message, color) {
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.textContent = message;
+    notification.style.backgroundColor = color;
     document.body.appendChild(notification);
 
     setTimeout(() => {
@@ -119,7 +120,7 @@ document.getElementById('add-data-form').addEventListener('submit', (event) => {
         console.log('Data successfully added:', data);
         document.getElementById('fetch-data').click();
         document.getElementById('add-data-form').reset();
-        showNotification("Запис було успішно додано!");
+        showNotification("Запис було успішно додано!", "green");
     })
     .catch(error => {
         console.error('Error adding data:', error);
@@ -145,7 +146,7 @@ function addEventListeners() {
             .then(data => {
                 console.log('Data successfully deleted:', data);
                 document.getElementById('fetch-data').click();
-                showNotification("Запис було успішно видалено!");
+                showNotification("Запис було успішно видалено!", "red");
             })
             .catch(error => {
                 console.error('Error deleting data:', error);
@@ -183,6 +184,7 @@ function addEventListeners() {
             .then(data => {
                 console.log('Дані успішно оновлено:', data);
                 document.getElementById('fetch-data').click(); 
+                showNotification("Запис було успішно відредаговано!", "yellow");
             })
             .catch(error => {
                 console.error('Помилка при редагуванні даних:', error);
