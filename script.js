@@ -17,6 +17,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
             headerRow.innerHTML = `
                 <th>ID</th>
                 <th>${selectedTable === 'water' ? 'ID Об\'єкта' : 'ID Об\'єкту'}</th>
+                <th>Назва Об\'єкта</th>  <!-- Додано новий стовпець -->
                 <th>Назва Забруднюючої Речовини</th>
                 <th>Об\'єм Викидів (тонн)</th>
                 <th>Ставка Податку</th>
@@ -27,7 +28,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
             tableBody.appendChild(headerRow);
 
             if (data.length === 0) {
-                tableBody.innerHTML += '<tr><td colspan="8" class="error">Дані не знайдені</td></tr>'; 
+                tableBody.innerHTML += '<tr><td colspan="9" class="error">Дані не знайдені</td></tr>'; 
             } else {
                 data.forEach(row => {
                     const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
@@ -38,6 +39,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                     tr.innerHTML = `
                         <td>${row['id']}</td>
                         <td>${selectedTable === 'water' ? (row['id_обєкта'] || '—') : (row['id_обєкту'] || '—')}</td>
+                        <td>${row['назва_обєкту'] || '—'}</td>  <!-- Відображення назви об'єкта -->
                         <td>${row['назва_забруд_речовини'] || '—'}</td>
                         <td>${emissionVolume || '—'}</td>
                         <td>${taxRate || '—'}</td>
@@ -55,7 +57,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         })
         .catch(error => {
             const tableBody = document.getElementById('data-table');
-            tableBody.innerHTML = `<tr><td colspan="8" class="error">Помилка при завантаженні даних: ${error.message}</td></tr>`; 
+            tableBody.innerHTML = `<tr><td colspan="9" class="error">Помилка при завантаженні даних: ${error.message}</td></tr>`; 
         });
 });
 
