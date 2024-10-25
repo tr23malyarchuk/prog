@@ -188,7 +188,17 @@ function showNotification(message) {
 
 document.getElementById('add-data-form').addEventListener('submit', (event) => {
     event.preventDefault();
-    // ... existing code ...
+
+    const newRecord = {
+        objectName: document.getElementById('object-name').value,
+        pollutantName: document.getElementById('pollutant-name').value,
+        emissionVolume: document.getElementById('emission-volume').value,
+        taxRate: document.getElementById('tax-rate').value,
+        year: document.getElementById('year').value
+    };
+
+    const selectedTable = document.getElementById('table-select').value;
+    const url = selectedTable === 'water' ? 'http://localhost:3005/data/water' : 'http://localhost:3005/data/air';
 
     fetch(url, {
         method: 'POST',
