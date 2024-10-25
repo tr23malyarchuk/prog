@@ -161,7 +161,7 @@ function addEventListeners() {
             const url = selectedTable === 'water' ? `http://localhost:3005/data/water/${id}` : `http://localhost:3005/data/air/${id}`;
 
             const newRecord = {
-                objectName: prompt('Введіть нову назву об\'єкту:'),
+                objectName: prompt('Введіть id нового об\'єкту:'),
                 pollutantName: prompt('Введіть нову назву забруднюючої речовини:'),
                 emissionVolume: prompt('Введіть новий об\'єм викидів:'),
                 taxRate: prompt('Введіть нову ставку податку за викиди:'),
