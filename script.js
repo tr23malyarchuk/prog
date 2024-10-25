@@ -73,6 +73,21 @@ document.getElementById('fetch-data').addEventListener('click', () => {
         });
 });
 
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+    }, 2000);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 2500);
+}
+
 document.getElementById('add-data-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -96,17 +111,18 @@ document.getElementById('add-data-form').addEventListener('submit', (event) => {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Мережна помилка');
+            throw new Error('Network error');
         }
         return response.json();
     })
     .then(data => {
-        console.log('Дані успішно додано:', data);
-        document.getElementById('fetch-data').click(); 
-        document.getElementById('add-data-form').reset(); 
+        console.log('Data successfully added:', data);
+        document.getElementById('fetch-data').click();
+        document.getElementById('add-data-form').reset();
+        showNotification("Запис було успішно додано!");
     })
     .catch(error => {
-        console.error('Помилка при додаванні даних:', error);
+        console.error('Error adding data:', error);
     });
 });
 
@@ -122,16 +138,17 @@ function addEventListeners() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Мережна помилка');
+                    throw new Error('Network error');
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('Дані успішно видалено:', data);
-                document.getElementById('fetch-data').click(); 
+                console.log('Data successfully deleted:', data);
+                document.getElementById('fetch-data').click();
+                showNotification("Запис було успішно видалено!");
             })
             .catch(error => {
-                console.error('Помилка при видаленні даних:', error);
+                console.error('Error deleting data:', error);
             });
         });
     });
@@ -169,84 +186,6 @@ function addEventListeners() {
             })
             .catch(error => {
                 console.error('Помилка при редагуванні даних:', error);
-            });
-        });
-    });
-}
-
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerText = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.remove();
-    }, 3000); 
-}
-
-document.getElementById('add-data-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const newRecord = {
-        objectName: document.getElementById('object-name').value,
-        pollutantName: document.getElementById('pollutant-name').value,
-        emissionVolume: document.getElementById('emission-volume').value,
-        taxRate: document.getElementById('tax-rate').value,
-        year: document.getElementById('year').value
-    };
-
-    const selectedTable = document.getElementById('table-select').value;
-    const url = selectedTable === 'water' ? 'http://localhost:3005/data/water' : 'http://localhost:3005/data/air';
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newRecord),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Мережна помилка');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Дані успішно додано:', data);
-        showNotification('Запис успішно додано'); 
-        document.getElementById('fetch-data').click(); 
-        document.getElementById('add-data-form').reset(); 
-    })
-    .catch(error => {
-        console.error('Помилка при додаванні даних:', error);
-    });
-});
-
-function addEventListeners() {
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', (event) => {
-            const id = event.target.getAttribute('data-id');
-            const selectedTable = document.getElementById('table-select').value;
-            const url = selectedTable === 'water' ? `http://localhost:3005/data/water/${id}` : `http://localhost:3005/data/air/${id}`;
-
-            fetch(url, {
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Мережна помилка');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Дані успішно видалено:', data);
-                showNotification('Запис успішно видалено'); 
-                document.getElementById('fetch-data').click(); 
-            })
-            .catch(error => {
-                console.error('Помилка при видаленні даних:', error);
             });
         });
     });
