@@ -9,14 +9,13 @@
 <body>
     <h1>Інформація про викиди забруднюючих речовин</h1>
     
-    <div class="tab-container">
-        <button class="tab-button" onclick="openTab('water-tax')">Розрахунок податку для забруднення вод</button>
-        <button class="tab-button" onclick="openTab('air-tax')">Розрахунок податку для забруднення повітря</button>
+    <div class="tabs">
+        <button onclick="openTab('water-tax-calc')">Розрахунок податку для забруднення вод</button>
+        <button onclick="openTab('air-tax-calc')">Розрахунок податку для забруднення повітря</button>
     </div>
     
-    <div id="water-tax" class="tab-content">
-        <h2>Розрахунок податку для забруднення вод</h2>
-        <form id="water-tax-form">
+    <div id="water-tax-calc" class="tab-content">
+        <form id="water-tax-form" class="tax-form">
             <label for="water-object-select">Оберіть об'єкт:</label>
             <select id="water-object-select">
                 <option value="1">Рівне</option>
@@ -28,9 +27,8 @@
         <div id="water-tax-result" class="tax-result"></div>
     </div>
     
-    <div id="air-tax" class="tab-content">
-        <h2>Розрахунок податку для забруднення повітря</h2>
-        <form id="air-tax-form">
+    <div id="air-tax-calc" class="tab-content">
+        <form id="air-tax-form" class="tax-form">
             <label for="air-object-select">Оберіть об'єкт:</label>
             <select id="air-object-select">
                 <option value="1">Рівне</option>
@@ -40,7 +38,8 @@
             <button type="button" onclick="calculateTax('air')">Розрахувати податок</button>
         </form>
         <div id="air-tax-result" class="tax-result"></div>
-    </div>     
+    </div>
+    
     
     <h2 id="add-record-title">Додати новий запис</h2>
     <form id="add-data-form">
@@ -95,6 +94,11 @@
     </select>
     <button id="fetch-data" class="small-button">Показати дані</button> 
     
+    <div class="table-controls">
+        <input type="text" id="search-input" placeholder="Пошук..." />
+        <button id="sort-asc-btn">Сортувати за зростанням</button>
+        <button id="sort-desc-btn">Сортувати за спаданням</button>
+    </div>
 
     <table border="1" id="data-table">
         <thead>

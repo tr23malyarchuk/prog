@@ -1,10 +1,40 @@
-// Toggle between tabs
 function openTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active-tab'));
     document.getElementById(tabId).classList.add('active-tab');
 }
 
-// Function to calculate tax
+// Sorting function
+function sortTable(columnIndex, ascending = true) {
+    const table = document.getElementById('data-table');
+    const rows = Array.from(table.rows).slice(1); // Get rows except the header
+    rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].textContent.trim();
+        const bText = b.cells[columnIndex].textContent.trim();
+        return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+    });
+    rows.forEach(row => table.appendChild(row)); // Reorder rows in the table
+}
+
+// Search function
+function searchTable() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const rows = document.querySelectorAll('#data-table tr:not(:first-child)'); // Exclude header
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+        const rowText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+        row.style.display = rowText.includes(searchInput) ? '' : 'none'; // Show or hide rows based on search
+    });
+}
+
+// Event listeners for sorting and searching
+document.getElementById('search-input').addEventListener('input', searchTable);
+document.getElementById('sort-asc-btn').addEventListener('click', () => sortTable(1, true)); // Change 1 to the desired column index
+document.getElementById('sort-desc-btn').addEventListener('click', () => sortTable(1, false)); // Change 1 to the desired column index
+
+// ... rest of your code remains unchanged
+
+
 function calculateTax(type) {
     const objectId = document.getElementById(type === 'water' ? 'water-object-select' : 'air-object-select').value;
     const url = type === 'water' ? `http://localhost:3005/data/water` : `http://localhost:3005/data/air`;
@@ -18,7 +48,7 @@ function calculateTax(type) {
 
             filteredData.forEach(record => {
                 const volume = parseFloat(record['обєм_викидів_тонн']) || 0;
-                const rate = type === 'water' ? parseFloat(record['ставка_за_викиди_в_водойми']) || 0 : parseFloat(record['ставка_за_викиди_в_повітря']) || 0;
+                const rate = parseFloat(type === 'water' ? record['ставка_за_викиди_в_водойми'] : record['ставка_за_викиди_в_повітря']) || 0;
                 totalTax += volume * rate;
             });
 
@@ -30,6 +60,7 @@ function calculateTax(type) {
             resultContainer.classList.add('error');
         });
 }
+
 
 document.getElementById('fetch-data').addEventListener('click', () => {
     const selectedTable = document.getElementById('table-select').value;
@@ -64,7 +95,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                 tableBody.innerHTML += '<tr><td colspan="9" class="error">Дані не знайдені</td></tr>'; 
             } else {
                 data.forEach(row => {
-                    const emissionVolume = parseFloat(row['обєм_викидів_тонн']) ? parseFloat(row['обєм_викидів_тонн']).toFixed(14) : '—'; // округлить до 4 знаков
+                    const emissionVolume = parseFloat(row['обєм_викидів_тонн']) ? parseFloat(row['обєм_викидів_тонн']).toFixed(14) : '—';
                     const taxRate = selectedTable === 'water' ? parseFloat(row['ставка_за_викиди_в_водойми']) || 0 : parseFloat(row['ставка_за_викиди_в_повітря']) || 0;
                     const tax = emissionVolume * taxRate; 
             
