@@ -3,37 +3,31 @@ function openTab(tabId) {
     document.getElementById(tabId).classList.add('active-tab');
 }
 
-// Sorting function
 function sortTable(columnIndex, ascending = true) {
     const table = document.getElementById('data-table');
-    const rows = Array.from(table.rows).slice(1); // Get rows except the header
+    const rows = Array.from(table.rows).slice(1); 
     rows.sort((a, b) => {
         const aText = a.cells[columnIndex].textContent.trim();
         const bText = b.cells[columnIndex].textContent.trim();
         return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
     });
-    rows.forEach(row => table.appendChild(row)); // Reorder rows in the table
+    rows.forEach(row => table.appendChild(row)); 
 }
 
-// Search function
 function searchTable() {
     const searchInput = document.getElementById('search-input').value.toLowerCase();
-    const rows = document.querySelectorAll('#data-table tr:not(:first-child)'); // Exclude header
+    const rows = document.querySelectorAll('#data-table tr:not(:first-child)'); 
 
     rows.forEach(row => {
         const cells = Array.from(row.cells);
         const rowText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-        row.style.display = rowText.includes(searchInput) ? '' : 'none'; // Show or hide rows based on search
+        row.style.display = rowText.includes(searchInput) ? '' : 'none'; 
     });
 }
 
-// Event listeners for sorting and searching
 document.getElementById('search-input').addEventListener('input', searchTable);
-document.getElementById('sort-asc-btn').addEventListener('click', () => sortTable(1, true)); // Change 1 to the desired column index
-document.getElementById('sort-desc-btn').addEventListener('click', () => sortTable(1, false)); // Change 1 to the desired column index
-
-// ... rest of your code remains unchanged
-
+document.getElementById('sort-asc-btn').addEventListener('click', () => sortTable(1, true)); 
+document.getElementById('sort-desc-btn').addEventListener('click', () => sortTable(1, false)); 
 
 function calculateTax(type) {
     const objectId = document.getElementById(type === 'water' ? 'water-object-select' : 'air-object-select').value;
