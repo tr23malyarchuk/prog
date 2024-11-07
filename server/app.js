@@ -37,8 +37,9 @@ app.get('/data/air', (req, res) => {
     executeQuery(res, query);
 });
 
-app.post('/data/water', (req, res) => {
+app.post('/data/water', (req, res) => { 
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
+    
     const query = 'INSERT INTO інфа_про_водойми (id_обєкта, назва_забруд_речовини, обєм_викидів_тонн, ставка_за_викиди_в_водойми, Рік) VALUES (?, ?, ?, ?, ?)';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year]);
 });
