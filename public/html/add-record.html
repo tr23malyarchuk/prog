@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати новий запис</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Додати новий запис</h2>
+
+<div id="add-record-form">
+    <form id="add-data-form">
+        <label for="object-name">Назва об'єкту:</label>
+        <select id="object-name" required>
+            <option value="">Оберіть об'єкт</option>
+            <option value="1">Рівне</option>
+            <option value="2">Хмельницький</option>
+            <option value="3">Бровари</option>
+        </select>
+
+        <label for="table-select1">В яку таблицю вставити запис:</label>
+        <select id="table-select1" required>
+            <option value="water">Скиди забруднюючих речовин у водні об'єкти</option>
+            <option value="air">Викиди в атмосферне повітря</option>
+        </select>
+
+        <label for="pollutant-name">Назва забруднюючої речовини:</label>
+        <select id="pollutant-name" required>
+            <option value="">Оберіть або введіть забруднюючу речовину</option>
+            <option value="Формальдегід">Формальдегід</option>
+            <option value="Азоту оксид">Азоту оксид</option>
+            <option value="Аміак">Аміак</option>
+             <option value="Ангідрид сірчистий">Ангідрид сірчистий</option>
+      <option value="Ацетон">Ацетон</option>
+      <option value="Бензопірен">Бензопірен</option>
+      <option value="Бутилацетат">Бутилацетат</option>
+      <option value="Ванадію п’ятиокис">Ванадію п’ятиокис</option>
+      <option value="Водень хлористий">Водень хлористий</option>
+      <option value="Вуглецю окис">Вуглецю окис</option>
+      <option value="Вуглеводні">Вуглеводні</option>
+      <option value="Газоподібні фтористі сполуки">Газоподібні фтористі сполуки</option>
+      <option value="Тверді речовини">Тверді речовини</option>
+      <option value="Кадмій">Кадмій</option>
+      <option value="Марганець">Марганець</option>
+      <option value="Нікель">Нікель</option>
+       <option value="Озон">Озон</option>
+       <option value="Ртуть">Ртуть</option>
+       <option value="Свинець">Свинець</option>
+       <option value="Сірководень">Сірководень</option>
+       <option value="Сірковуглець">Сірковуглець</option>
+       <option value="Спирт">Спирт</option>
+       <option value="Стирол">Стирол</option>
+       <option value="Фенол">Фенол</option>
+       <option value="Хром">Хром</option>
+       <option value="Азот амонійний">Азот амонійний</option>
+       <option value="БСК 5">БСК 5</option>
+       <option value="Завислі речовини">Завислі речовини</option>
+       <option value="Нафтопродукти">Нафтопродукти</option>
+       <option value="Нітрати">Нітрати</option>
+       <option value="Нітрити">Нітрити</option>
+       <option value="Сульфати">Сульфати</option>
+       <option value="Фосфати">Фосфати</option>
+       <option value="Хлориди">Хлориди</option>
+       
+  <option value="Завислі речовини">Завислі речовини</option>
+            <option value="custom">Інше (ввести вручну)</option>
+        </select>
+        <input type="text" id="custom-pollutant-name" placeholder="Введіть назву забруднюючої речовини" style="display: none;" />
+        
+  <label for="hazard-class" id="hazard-class-label" style="display: none;">Клас небезпеки:</label>
+  <select id="hazard-class" style="display: none;">
+      <option value="1">I</option>
+      <option value="2">II</option>
+      <option value="3">III</option>
+      <option value="4">IV</option>
+  </select>
+  
+        <label for="emission-volume">Об'єм викидів (тонн):</label>
+        <input type="number" id="emission-volume" placeholder="Об'єм викидів" min="0" step="0.01" required>
+
+        <label for="year">Рік:</label>
+        <input type="number" id="year" placeholder="Рік" min="2015" max="2023" required>
+        
+        <button type="submit">Додати запис</button> 
+    </form> 
+</div>
+
+<script src="../../app/script.js"></script>
+
+</body>
+</html>

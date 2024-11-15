@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця даних</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Таблиця даних про викиди та скиди забруднюючих речовин</h2>
+
+<select id="table-select" class="small-select">
+    <option value="water">Скиди забруднюючих речовин у водні об'єкти</option>
+    <option value="air">Викиди в атмосферне повітря</option>
+</select>
+
+<button id="fetch-data" class="small-button">Показати дані</button>
+
+<div class="table-controls">
+    <input type="text" id="search-input" placeholder="Пошук..." />
+    <button id="sort-asc-btn">Сортувати за зростанням</button>
+    <button id="sort-desc-btn">Сортувати за спаданням</button>
+</div>
+
+<table border="1" id="data-table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Назва об'єкту</th>
+            <th>Назва забруднюючої речовини</th>
+            <th id="emission-volume">Об'єм викидів</th>
+            <th>Ставки податку за викиди</th>
+            <th>Рік</th>
+            <th>Податок</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody id="data-table-body"></tbody>
+</table>
+   
+<script src="../../app/script.js"></script>
+
+</body>
+</html>
