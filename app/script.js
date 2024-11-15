@@ -253,13 +253,14 @@ document.getElementById('pollutant-name').addEventListener('change', (event) => 
 
     const selectedTable = document.getElementById('table-select1').value;
 
-    if (event.target.value === 'custom' && selectedTable === 'air') {
-        console.log("Custom pollutant selected, showing additional fields"); // Для перевірки
+    if (event.target.value === 'custom') {
         customPollutantField.style.display = 'block';
-        hazardClassLabel.style.display = 'block';
-        hazardClassSelect.style.display = 'block';
+        if (selectedTable === 'air') {
+            hazardClassLabel.style.display = 'block';
+            hazardClassSelect.style.display = 'block';
+        }
     } else {
-        customPollutantField.style.display = 'block';
+        customPollutantField.style.display = 'none';
         hazardClassLabel.style.display = 'none';
         hazardClassSelect.style.display = 'none';
     }
