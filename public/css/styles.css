@@ -8,7 +8,11 @@ body {
 
 h1 {
     text-align: center;
-    color: #2c3e50;
+    color: #1c60a4;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 20px;
 }
 
 h2 {
@@ -228,29 +232,16 @@ button:hover {
 .toggle-container {
     margin: 10px 0;
     text-align: center;
-}
-
-button {
-    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px; /* Відстань між кнопками */
 }
 
 /* Приховати форму для вставки */
 #add-record-form {
     margin-top: 20px;
-}
-
-/* Якщо розділ згорнутий */
-.tab-content {
     display: none;
 }
 
-.active-tab {
-    display: block;
-}
-
-#add-record-form {
-    display: none;
-}
 .toggle-container button {
     padding: 8px 16px;
     font-size: 14px;
@@ -267,6 +258,13 @@ button {
 /* Ефект при наведенні на кнопки згортування/розгортання */
 .toggle-container button:hover {
     background: linear-gradient(90deg, #0056b3, #003c73); /* Темніший градієнт */
+}
+
+.button-container {
+    display: flex; /* Використовуємо flexbox для вирівнювання */
+    justify-content: center; /* Центруємо по горизонталі */
+    align-items: center; /* Центруємо по вертикалі (якщо потрібно) */
+    flex-direction:row; /* Вирівнюємо кнопки вертикально */
 }
 
 /* Стиль для кнопки додавання нового запису */
@@ -286,30 +284,4 @@ button {
 /* Ефект при наведенні на кнопку додавання */
 #add-record-btn:hover {
     background: linear-gradient(90deg, #0056b3, #003c73); /* Темніший градієнт */
-}
-
-/* Розміщення кнопок в рядочок */
-.toggle-container {
-    display: inline-block;
-    margin-right: 10px; /* Відстань між кнопками */
-}
-
-
-/* Стиль для всього body */
-body {
-    font-family: 'Roboto', sans-serif;  /* Шрифт для всього контенту */
-  
-    margin: 0;
-    padding: 20px;
-    color: #333;
-}
-
-/* Стиль для заголовка h1 */
-h1 {
-    text-align: center;
-    color: #1c60a4;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase; /* Великі літери для заголовка */
-    margin-top: 20px;
 }
