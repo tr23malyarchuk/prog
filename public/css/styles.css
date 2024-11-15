@@ -157,10 +157,6 @@ tr:hover {
     margin-top: 20px;
 }
 
-.active-tab {
-    display: block;
-}
-
 .tax-form {
     display: inline-block;
     padding: 20px;

@@ -1,8 +1,3 @@
-function openTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active-tab'));
-    document.getElementById(tabId).classList.add('active-tab');
-}
-
 function sortTable(columnIndex, ascending = true) {
     const table = document.getElementById('data-table');
     const rows = Array.from(table.rows).slice(1); 
