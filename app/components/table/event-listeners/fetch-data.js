@@ -38,7 +38,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
             } else {
                 headerRow.innerHTML = `
                     <th>ID</th>
-                    <th>${selectedTable === 'water' ? 'ID Об\'єкта' : 'ID Об\'єкту'}</th>
+                    <th>ID Об'єкта</th>
                     <th>Назва Об'єкта</th>
                     <th>Назва Забруднюючої Речовини</th>
                     <th>Об'єм Викидів (тонн)</th>
@@ -59,10 +59,6 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                         objectName = row['id_обєкта'] === 1 ? 'Рівне' :
                                      row['id_обєкта'] === 2 ? 'Хмельницьк' :
                                      row['id_обєкта'] === 3 ? 'Бровари' : '—';
-                    } else if (row['id_обєкту']) {
-                        objectName = row['id_обєкту'] === 1 ? 'Рівне' :
-                                     row['id_обєкту'] === 2 ? 'Хмельницьк' :
-                                     row['id_обєкту'] === 3 ? 'Бровари' : '—';
                     }
                 
                     const tr = document.createElement('tr');
@@ -117,7 +113,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                 
                     tr.innerHTML = `
                         <td>${row['id']}</td>
-                        <td>${selectedTable === 'water' ? (row['id_обєкта'] || '—') : (row['id_обєкту'] || '—')}</td>
+                        <td>${row['id_обєкта']}</td>
                         <td>${objectName}</td>
                         <td>${row['назва_забруд_речовини'] || '—'}</td>
                         <td>${emissionVolume || '—'}</td>
