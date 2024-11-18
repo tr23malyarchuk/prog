@@ -59,6 +59,10 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                         objectName = row['id_обєкта'] === 1 ? 'Рівне' :
                                      row['id_обєкта'] === 2 ? 'Хмельницьк' :
                                      row['id_обєкта'] === 3 ? 'Бровари' : '—';
+                    } else if (row['id_обєкту']) {
+                        objectName = row['id_обєкту'] === 1 ? 'Рівне' :
+                                     row['id_обєкту'] === 2 ? 'Хмельницьк' :
+                                     row['id_обєкту'] === 3 ? 'Бровари' : '—';
                     }
                 
                     const tr = document.createElement('tr');
@@ -76,27 +80,59 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                             <td>${row['рік'] || '—'}</td>
                         `;
                     } else {
-                        const emissionVolume = parseFloat(row['обєм_викидів_тонн']) || 0;
-                        const taxRate = parseFloat(row['ставка_за_викиди']) || 0;
+                        const emissionVolume = parseFloat(row['обєм_викидів_тонн']) ? parseFloat(row['обєм_викидів_тонн']).toFixed(14) : '—';
+
+                        let taxRate = 0;
+    
+                        // Перевірка ставки податку по назві забруднюючої речовини
+                        const pollutantName = row['назва_забруд_речовини'];
+                        taxRate = calculateTaxRate(pollutantName);
+    
+                        if (taxRate === 0) {
+                            // Якщо ставка не знайдена, для води ставка залежить від об'єму викидів
+                            if (selectedTable === 'water') {
+                                const volume = parseFloat(row['обєм_викидів_тонн']);
+                                if (volume <= 0.001) {
+                                    taxRate = 1349948.0;
+                                } else if (volume <= 0.1) {
+                                    taxRate = 978777.84;
+                                } else if (volume <= 1) {
+                                    taxRate = 168741.52;
+                                } else if (volume <= 10) {
+                                    taxRate = 17173.04;
+                                } else {
+                                    taxRate = 3437.76;
+                                }
+                            }
+                            // Якщо це не вода, ставка податку залежить від класу небезпеки для повітря
+                            else if (selectedTable === 'air') {
+                                const hazardClass = row['клас_небезпеки'] || '—';
+    
+                                // Використовуємо клас небезпеки для визначення ставки податку
+                                taxRate = getTaxRateByHazardClass(hazardClass);
+                            }
+                        }
+    
                         const tax = emissionVolume * taxRate;
                 
-                        tr.innerHTML = `
-                            <td>${row['id']}</td>
-                            <td>${row['id_обєкта'] || '—'}</td>
-                            <td>${objectName}</td>
-                            <td>${row['назва_забруд_речовини'] || '—'}</td>
-                            <td>${emissionVolume.toFixed(4)}</td>
-                            <td>${taxRate.toFixed(2)}</td>
-                            <td>${row['Рік'] || '—'}</td>
-                            <td>${!isNaN(tax) ? tax.toFixed(2) : '—'}</td>
-                            <td>
-                                <button class="edit-btn" data-id="${row['id']}">Редагувати</button>
-                                <button class="delete-btn" data-id="${row['id']}">Видалити</button>
-                            </td>
-                        `;
+                    tr.innerHTML = `
+                        <td>${row['id']}</td>
+                        <td>${selectedTable === 'water' ? (row['id_обєкта'] || '—') : (row['id_обєкту'] || '—')}</td>
+                        <td>${objectName}</td>
+                        <td>${row['назва_забруд_речовини'] || '—'}</td>
+                        <td>${emissionVolume || '—'}</td>
+                        <td>${taxRate || '—'}</td>
+                        <td>${row['Рік'] || '—'}</td>
+                        <td>${tax.toFixed(10) || '—'}</td>
+                        <td>
+                            <button class="edit-btn" data-id="${row['id']}">Редагувати</button>
+                            <button class="delete-btn" data-id="${row['id']}">Видалити</button>
+                        </td>
+                    `;
                     }
                     tableBody.appendChild(tr);
                 });
+                addEventListeners();
             }
         })
         .catch(error => {
