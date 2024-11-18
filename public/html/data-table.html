@@ -22,6 +22,7 @@
         <select id="table-select1" required>
           <option value="water">Скиди забруднюючих речовин у водні об'єкти</option>
           <option value="air">Викиди в атмосферне повітря</option>
+          <option value="air-risk">Оцінка ризику за викидами у повітря</option>
         </select>
         <label for="pollutant-name">Назва забруднюючої речовини:</label>
         <select id="pollutant-name" required>
@@ -78,9 +79,43 @@
         <button type="submit">Додати запис</button>
       </form>
     </div>
+    <div id="add-record-form" style="display: none;">
+      <h2>Додати новий запис для оцінки ризику</h2>
+      <form id="add-air-risk-form">
+          <label for="object-name">Назва об'єкта:</label>
+          <select id="object-name" required>
+              <option value="1">Рівне</option>
+              <option value="2">Хмельницький</option>
+              <option value="3">Бровари</option>
+          </select>
+          <label for="pollutant-name">Назва забруднюючої речовини:</label>
+          <input type="text" id="pollutant-name" required>
+  
+          <label for="emission-volume">Об'єм викидів (тонн):</label>
+          <input type="number" id="emission-volume" required>
+  
+          <label for="hazard-class">Клас небезпеки:</label>
+          <input type="number" id="hazard-class" required>
+  
+          <label for="critical-organs">Критичні органи/системи:</label>
+          <input type="text" id="critical-organs" required>
+  
+          <label for="reference-concentration">Референсна концентрація (мг/м³):</label>
+          <input type="number" id="reference-concentration" required>
+  
+          <label for="cancer-factor">Фактор канцерогенного потенціалу:</label>
+          <input type="number" id="cancer-factor" step="0.0001" required>
+  
+          <label for="year">Рік:</label>
+          <input type="number" id="year" required>
+  
+          <button type="button" onclick="submitAirRiskData()">Додати запис</button>
+      </form>
+  </div>
     <select id="table-select" class="small-select">
       <option value="water">Скиди забруднюючих речовин у водні об'єкти</option>
       <option value="air">Викиди в атмосферне повітря</option>
+      <option value="air-risk">Оцінка ризику за викидами у повітря</option>
     </select>
     <button id="fetch-data" class="small-button">Показати дані</button>
     <div class="table-controls">
