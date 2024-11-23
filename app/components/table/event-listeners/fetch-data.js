@@ -34,6 +34,7 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                     <th>Референтна Концентрація (мг/м³)</th>
                     <th>Фактор Канцерогенного Потенціалу</th>
                     <th>Рік</th>
+                    <th>Дії</th>
                 `;
             } else {
                 headerRow.innerHTML = `
@@ -74,6 +75,10 @@ document.getElementById('fetch-data').addEventListener('click', () => {
                             <td>${row['ref_концентрація_мг_м3'] || '—'}</td>
                             <td>${row['фактор_канцерогенного_потенціалу'] || '—'}</td>
                             <td>${row['рік'] || '—'}</td>
+                            <td>
+                                <button class="edit-btn" data-id="${row['id']}">Редагувати</button>
+                                <button class="delete-btn" data-id="${row['id']}">Видалити</button>
+                            </td>
                         `;
                     } else {
                         const emissionVolume = parseFloat(row['обєм_викидів_тонн']) ? parseFloat(row['обєм_викидів_тонн']).toFixed(14) : '—';

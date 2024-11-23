@@ -57,7 +57,7 @@ app.post('/data/air', (req, res) => {
 
 app.post('/data/air-risk', (req, res) => {
     const { objectName, pollutantName, emissionVolume, hazardClass, criticalOrgans, referenceConcentration, cancerFactor, year } = req.body;
-    const query = 'INSERT INTO оцінка_ризику_повітря (id_обєкта, назва_забруд_речовини, обєм_викидів_тонн, клас_небезпеки, критичні_органи_або_системи, ref_концентрація_мг_м3, фактор_канцерогенного_потенціалу, рік) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO оцінка_ризику_повітря (id_обєкта, назва_забруднюючої_речовини, обєм_викидів_тонн, клас_небезпеки, критичні_органи_або_системи, ref_концентрація_мг_м3, фактор_канцерогенного_потенціалу, рік) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, hazardClass, criticalOrgans, referenceConcentration, cancerFactor, year]);
 });
 
@@ -70,6 +70,12 @@ app.delete('/data/water/:id', (req, res) => {
 app.delete('/data/air/:id', (req, res) => {
     const { id } = req.params;
     const query = 'DELETE FROM інфа_про_повітря WHERE id = ?';
+    executeQuery(res, query, [id]);
+});
+
+app.delete('/data/air-risk/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM оцінка_ризику_повітря WHERE id = ?';
     executeQuery(res, query, [id]);
 });
 
