@@ -3,7 +3,15 @@ function addEventListeners() {
         button.addEventListener('click', (event) => {
             const id = event.target.getAttribute('data-id');
             const selectedTable = document.getElementById('table-select').value;
-            const url = selectedTable === 'water' ? `http://localhost:3005/data/water/${id}` : `http://localhost:3005/data/air/${id}`;
+            let url = '';
+
+            if (selectedTable === 'water') {
+                url = `http://localhost:3005/data/water/${id}`;
+            } else if (selectedTable === 'air') {
+                url = `http://localhost:3005/data/air/${id}`;
+            } else if (selectedTable === 'air-risk') {
+                url = `http://localhost:3005/data/air-risk/${id}`;
+            }
 
             fetch(url, {
                 method: 'DELETE',
@@ -16,7 +24,7 @@ function addEventListeners() {
             })
             .then(data => {
                 console.log('Data successfully deleted:', data);
-                document.getElementById('fetch-data').click();
+                document.getElementById('fetch-data').click(); // Reload the data after delete
                 showNotification("Запис було успішно видалено!", "red");
             })
             .catch(error => {
