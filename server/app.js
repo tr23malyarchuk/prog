@@ -89,8 +89,19 @@ app.put('/data/water/:id', (req, res) => {
 app.put('/data/air/:id', (req, res) => {
     const { id } = req.params;
     const { objectName, pollutantName, emissionVolume, taxRate, year } = req.body;
-    const query = 'UPDATE інфа_про_повітря SET id_обєкту = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_повітря = ?, Рік = ? WHERE id = ?';
+    const query = 'UPDATE інфа_про_повітря SET id_обєкта = ?, назва_забруд_речовини = ?, обєм_викидів_тонн = ?, ставка_за_викиди_в_повітря = ?, Рік = ? WHERE id = ?';
     executeQuery(res, query, [objectName, pollutantName, emissionVolume, taxRate, year, id]);
+});
+
+app.post('/data/air-risk', (req, res) => {
+    const { objectName, pollutantName, concentration, hazardClass, criticalOrgans, referenceConcentration, cancerFactor, year } = req.body;
+    const query = 'INSERT INTO оцінка_ризику_повітря (id_обєкта, назва_забруднюючої_речовини, концентрація_речовини, клас_небезпеки, критичні_органи_або_системи, ref_концентрація_мг_м3, фактор_канцерогенного_потенціалу, рік) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    executeQuery(res, query, [objectName, pollutantName, concentration, hazardClass, criticalOrgans, referenceConcentration, cancerFactor, year]);
+});
+
+app.get('/data/air-risk', (req, res) => {
+    const query = 'SELECT * FROM оцінка_ризику_повітря';
+    executeQuery(res, query);
 });
 
 app.listen(3005, () => {
