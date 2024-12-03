@@ -15,6 +15,9 @@
     <h1>Екологічний моніторинг</h1>
     <div class="button-container">
         <div class="toggle-container">
+            <button onclick="toggleSection('dynamic-risk-calc')">Оцінка ризику для здоров'я населення</button>
+        </div>
+        <div class="toggle-container">
           <button onclick="toggleSection('non-cancer-risk-calc')">Оцінка ризику розвитку неканцерогенних ефектів</button>
         </div>      
         <div class="toggle-container">
@@ -33,11 +36,40 @@
           <button onclick="toggleSection('pcr-calc')">Оцінка популяційного канцерогенного ризику (PCR)</button>
         </div>   
       </div>
+      <div id="dynamic-risk-calc" class="tab-content" style="display: none;">
+        <h2>Оцінка ризику для здоров'я населення</h2>
+        <form id="risk-form" class="tax-form">
+          <label for="object">Виберіть об'єкт:</label>
+          <select id="object" name="object" required>
+              <option value="rivne">Рівне</option>
+              <option value="khmelnytsky">Хмельницьк</option>
+              <option value="brovary">Бровари</option>
+          </select>
+          
+          <div id="enterprise-container">
+              <label for="enterprise">Підприємство:</label>
+              <input type="text" id="enterprise" readonly>
+          </div>
+  
+          <label for="pollutant">Виберіть забруднюючу речовину:</label>
+          <select id="pollutant" name="pollutant" required></select>
+  
+          <label for="year">Виберіть рік:</label>
+          <select id="year" name="year" required></select>
+  
+          <button type="submit">Розрахувати ризик</button>
+      </form>
+  
+      <div id="result" class="tax-result">
+          <p id="risk-details"></p>
+      </div>
+      </div>
+         
 <div id="non-cancer-risk-calc" class="tab-content" style="display: none;">
     <h2>Оцінка ризику розвитку неканцерогенних ефектів</h2>
     <form id="non-cancer-risk-form" class="tax-form">
-      <label for="chemical-name">Назва хімічної речовини:</label>
-      <select id="chemical-name" required>
+      <label for="chemical-name1">Назва хімічної речовини:</label>
+      <select id="chemical-name1" required>
         <option value="">Оберіть хімічну речовину</option>
         <option value="Ацетальгідрид">Ацетальгідрид</option>
         <option value="Бензол">Бензол</option>
@@ -60,9 +92,9 @@
   </div>    
   <div id="risk-calc" class="tab-content" style="display: none;">
     <h2>Оцінка ризику неканцерогенних ефектів за комбінованого впливу речовин</h2>
-    <form id="risk-form">
-      <label for="chemical-name">Назва хімічної речовини:</label>
-      <select id="chemical-name" required>
+    <form id="risk-form1">
+      <label for="chemical-name2">Назва хімічної речовини:</label>
+      <select id="chemical-name2" required>
         <option value="">Оберіть хімічну речовину</option>
         <option value="Ацетальгідрид">Ацетальгідрид</option>
         <option value="Бензол">Бензол</option>
@@ -83,7 +115,7 @@
   
     <button type="button" onclick="calculateHI()">Розрахувати індекс небезпеки (HI)</button>
   
-    <div id="result"></div>
+    <div id="result" class="tax-result"></div>
   </div>
   <div id="cancer-risk-calc" class="tab-content" style="display: none;">
     <form id="cancer-risk-form" class="tax-form">
@@ -163,7 +195,8 @@
 </div>
 
 <script src="../../app/components/table/event-listeners/num-chemicals.js"></script>
-<script src="../../app/components/table/calculateCombinedCancerRisk.js"></script>
 <script src="../../app/components/table/calculateNonCanceric.js"></script>
+<script src="../../app/components/table/calculateRisk.js"></script>
+<script src="../../app/components/table/calculateCombinedCancerRisk.js"></script>
 </body>
 </html>

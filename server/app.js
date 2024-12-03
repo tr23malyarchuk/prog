@@ -101,8 +101,27 @@ app.put('/data/air-risk/:id', (req, res) => {
 });
 
 app.get('/data/air-risk', (req, res) => {
-    const query = 'SELECT * FROM оцінка_ризику_повітря';
-    executeQuery(res, query);
+    const { object, pollutant, year } = req.query;
+    let query = 'SELECT * FROM оцінка_ризику_повітря WHERE обєкт = ?';
+    let params = [object];
+
+    if (pollutant) {
+        query += ' AND назва_забруднюючої_речовини = ?';
+        params.push(pollutant);
+    }
+
+    if (year) {
+        query += ' AND рік = ?';
+        params.push(year);
+    }
+
+    pool.execute(query, params, (error, results) => {
+        if (error) {
+            console.error('Error fetching air risk data:', error);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(results);
+    });
 });
 
 app.listen(3005, () => {

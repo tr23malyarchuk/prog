@@ -1,7 +1,7 @@
 let chemicals = [];
 
 function addChemical() {
-    const name = document.getElementById("chemical-name").value; // Просто отримуємо значення з select без .trim()
+    const name = document.getElementById("chemical-name2").value; // Просто отримуємо значення з select без .trim()
     const hq = parseFloat(document.getElementById("hq-value").value.trim());
 
     console.log("Name:", name);  // Перевірка на консоль
@@ -44,7 +44,7 @@ function calculateHI() {
 }
 
 // Додавання слухача події на зміни в select
-document.getElementById("chemical-name").addEventListener("change", function() {
+document.getElementById("chemical-name2").addEventListener("change", function() {
     const name = this.value.trim();
     if (name !== "Оберіть хімічну речовину") {
         console.log("Вибрано: " + name); // Перевірка, чи вибрано значення
