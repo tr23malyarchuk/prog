@@ -1,81 +1,17 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Екологічний моніторинг</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <script src="../../app/components/taxForm/toggleSection.js"></script>
-    <script src="../../app/components/taxForm/calculateTax.js"></script>
-    <script src="../../app/components/taxForm/calculateTaxRate.js"></script>
-    <script src="../../app/components/taxForm/getTaxRateByHazardClass.js"></script>
-    <script src="../../app/components/taxForm/calculateRisk.js"></script>
-  </head>
-  <body>
-    <h1>Екологічний моніторинг</h1>
-    <div class="button-container">
-      <div class="toggle-container">
-        <button onclick="toggleSection('water-tax-calc')">Податок за скиди забруднюючих речовин у водні об'єкти</button>
-      </div>
-      <div class="toggle-container">
-        <button onclick="toggleSection('air-tax-calc')">Податок за викиди в атмосферне повітря забруднюючих речовин</button>
-      </div>
-      <div class="toggle-container">
-        <button onclick="location.href='data-table.html'">Показати таблицю даних та додати туди дані</button>
-      </div>
-      <div class="button-container">
-        <div class="toggle-container">
-          <button onclick="toggleSection('air-risk-calc')">Оцінка ризику забруднення повітря</button>
-        </div>
-      </div>
-    </div>
-    <div id="water-tax-calc" class="tab-content" style="display: none;">
-      <form id="water-tax-form" class="tax-form">
-        <label for="water-object-select">Оберіть об'єкт:</label>
-        <select id="water-object-select">
-          <option value="1">Рівне</option>
-          <option value="2">Хмельницьк</option>
-          <option value="3">Бровари</option>
-        </select>
-        <button type="button" onclick="calculateTax('water')">Розрахувати податок</button>
-      </form>
-      <div id="water-tax-result" class="tax-result"></div>
-    </div>
-    <div id="air-tax-calc" class="tab-content" style="display: none;">
-      <form id="air-tax-form" class="tax-form">
-        <label for="air-object-select">Оберіть об'єкт:</label>
-        <select id="air-object-select">
-          <option value="1">Рівне</option>
-          <option value="2">Хмельницьк</option>
-          <option value="3">Бровари</option>
-        </select>
-        <button type="button" onclick="calculateTax('air')">Розрахувати податок</button>
-      </form>
-      <div id="air-tax-result" class="tax-result"></div>
-    </div>
-    <div id="air-risk-calc" class="tab-content" style="display: none;">
-      <form id="air-risk-form" class="tax-form">
-        <label for="air-object-select">Оберіть об'єкт:</label>
-        <select id="air-object-select">
-          <option value="1">Рівне</option>
-          <option value="2">Хмельницьк</option>
-          <option value="3">Бровари</option>
-        </select>
-        <label for="pollutant-name">Назва забруднювачів:</label>
-        <input type="text" id="pollutant-name" required>
-        <label for="concentration">Концентрація:</label>
-        <input type="number" id="concentration" required>
-        <label for="hazard-class">Клас небезпеки:</label>
-        <input type="number" id="hazard-class" required>
-        <label for="critical-organs">Критичні органи:</label>
-        <input type="text" id="critical-organs">
-        <label for="reference-concentration">Референтна концентрація:</label>
-        <input type="number" id="reference-concentration">
-        <label for="cancer-factor">Фактор канцерогенного потенціалу:</label>
-        <input type="number" id="cancer-factor">
-        <button type="button" onclick="calculateRisk()">Розрахувати ризик</button>
-      </form>
-      <div id="air-risk-result" class="tax-result"></div>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Екологічний моніторинг</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <h1>Екологічний моніторинг</h1>
+  <div class="button-container">
+    <button onclick="location.href='data-table.html'">ЛР1 - Показати таблицю даних</button>
+    <button onclick="location.href='lr2.html'">ЛР2 - Податки за скиди та викиди</button>
+    <button onclick="location.href='lr3.html'">ЛР3 - Оцінка ризиків</button>
+  </div>
+</body>
 </html>

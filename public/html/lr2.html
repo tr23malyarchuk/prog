@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЛР2 - Податки за скиди та викиди</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../../app/components/taxForm/toggleSection.js"></script>
+  <script src="../../app/components/taxForm/calculateTax.js"></script>
+  <script src="../../app/components/taxForm/calculateTaxRate.js"></script>
+  <script src="../../app/components/taxForm/getTaxRateByHazardClass.js"></script>
+</head>
+<body>
+  <h1>ЛР2 - Податки за скиди та викиди</h1>
+  <div class="form-container">
+    <div id="water-tax-calc" class="form">
+      <h2>Податок за скиди забруднюючих речовин у водні об'єкти</h2>
+      <form id="water-tax-form" class="tax-form">
+        <label for="water-object-select">Оберіть об'єкт:</label>
+        <select id="water-object-select">
+          <option value="1">Рівне</option>
+          <option value="2">Хмельницьк</option>
+          <option value="3">Бровари</option>
+        </select>
+        <button type="button" onclick="calculateTax('water')">Розрахувати податок</button>
+      </form>
+      <div id="water-tax-result" class="tax-result"></div>
+    </div>
+
+    <div id="air-tax-calc" class="form">
+      <h2>Податок за викиди в атмосферне повітря забруднюючих речовин</h2>
+      <form id="air-tax-form" class="tax-form">
+        <label for="air-object-select">Оберіть об'єкт:</label>
+        <select id="air-object-select">
+          <option value="1">Рівне</option>
+          <option value="2">Хмельницьк</option>
+          <option value="3">Бровари</option>
+        </select>
+        <button type="button" onclick="calculateTax('air')">Розрахувати податок</button>
+      </form>
+      <div id="air-tax-result" class="tax-result"></div>
+    </div>
+  </div>
+</body>
+</html>

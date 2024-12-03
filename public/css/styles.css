@@ -232,15 +232,15 @@ tr:hover {
 }
 
 .toggle-container button {
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 10px 10px; /* Збільшено розмір кнопок */
+    font-size: 16px; /* Збільшено шрифт */
     background: linear-gradient(90deg, #007BFF, #0056b3); /* Синій градієнт */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
-    margin: 5px; /* Відстань між кнопками */
+    margin: 1px; /* Відстань між кнопками */
     width: auto; /* Кнопки не на весь екран */
 }
 
@@ -251,6 +251,7 @@ tr:hover {
 
 .button-container {
     display: flex; /* Використовуємо flexbox для вирівнювання */
+    flex-wrap: wrap; /*Дозволяєм кнопкам переноситись на інший рядок*/
     justify-content: center; /* Центруємо по горизонталі */
     align-items: center; /* Центруємо по вертикалі (якщо потрібно) */
     flex-direction:row; /* Вирівнюємо кнопки вертикально */
@@ -274,3 +275,89 @@ tr:hover {
 #add-record-btn:hover {
     background: linear-gradient(90deg, #0056b3, #003c73); /* Темніший градієнт */
 }
+
+#chemical-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#chemical-list li {
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1c60a4;
+}
+
+#risk-calc {
+    max-width: 600px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    #risk-calc {
+        width: 90%;
+    }
+}
+
+#individual-cancer-risk-calc {
+    margin-top: 20px;
+  }
+  
+  #individual-cancer-risk-result {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  #non-cancer-risk-calc {
+    margin-top: 20px;
+  }
+  
+  #non-cancer-risk-result {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  #combined-cancer-risk-calc {
+    margin-top: 20px;
+  }
+  
+  #combined-cancer-risk-result {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .toggle-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
