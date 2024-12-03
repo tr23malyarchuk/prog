@@ -1,4 +1,4 @@
-function calculateCombinedCancerRisk() {
+function calculateCombinedCancerRisk() { // Оцінку ризику розвитку неканцерогенних ефектів за комбінованого впливу речовин
     const numChemicals = parseInt(document.getElementById('num-chemicals').value);
     
     if (isNaN(numChemicals) || numChemicals <= 0) {

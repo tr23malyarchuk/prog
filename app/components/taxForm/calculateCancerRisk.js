@@ -1,4 +1,4 @@
-function calculateCancerRisk() {
+function calculateCancerRisk() { // Оцінка канцерогенного ризику на здоров'я населення
     const Ca = parseFloat(document.getElementById('conc-outside').value); // Концентрація речовини
     const Tout = parseFloat(document.getElementById('time-outside').value); // Час поза приміщенням
     const Tin = parseFloat(document.getElementById('time-inside').value); // Час у приміщенні

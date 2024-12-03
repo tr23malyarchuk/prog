@@ -1,4 +1,4 @@
-function calculateIndividualCancerRisk() {
+function calculateIndividualCancerRisk() { // Оцінка індивідуального канцерогенного ризику
     const LADD = parseFloat(document.getElementById('LADD').value);  // Середня добова доза
     const SF = parseFloat(document.getElementById('SF').value);      // Фактор нахилу
     

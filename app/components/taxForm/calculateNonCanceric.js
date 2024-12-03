@@ -1,11 +1,8 @@
 let chemicals = [];
 
 function addChemical() {
-    const name = document.getElementById("chemical-name2").value; // Просто отримуємо значення з select без .trim()
+    const name = document.getElementById("chemical-name2").value;
     const hq = parseFloat(document.getElementById("hq-value").value.trim());
-
-    console.log("Name:", name);  // Перевірка на консоль
-    console.log("HQ:", hq);  // Перевірка на консоль
 
     // Перевірка, чи вибрано ім'я
     if (name === "" || name === "Оберіть хімічну речовину") {
@@ -24,7 +21,6 @@ function addChemical() {
     updateChemicalList();
     document.getElementById("hq-value").value = ''; // Очищаємо поле HQ
 }
-
 
 // Функція для оновлення списку хімічних речовин
 function updateChemicalList() {

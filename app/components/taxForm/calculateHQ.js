@@ -1,4 +1,5 @@
-function calculateHQ() {
+function calculateHQ() { // Оцінка ризику розвитку неканцерогенних ефектів
+                         // Визначення коефіцієнта небезпеки
     const concentration = parseFloat(document.getElementById('concentration').value);  // Рівень впливу (C_i)
     const safeLevel = parseFloat(document.getElementById('safe-level').value);        // Безпечний рівень впливу (RfC)
     

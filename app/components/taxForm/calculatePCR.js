@@ -1,4 +1,4 @@
-function calculatePCR() {
+function calculatePCR() { // Оцінка популяційного ризику
     const cr = parseFloat(document.getElementById('individual-cancer-risk').value);
     const pop = parseInt(document.getElementById('population-size').value);
   

@@ -361,3 +361,44 @@ tr:hover {
     align-items: center;
   }
   
+  .form {
+    margin-bottom: 40px;
+  }
+
+  .tax-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .tax-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+
+  .tax-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .tax-form button:hover {
+    background-color: #45a049;
+  }
+
+  .tax-result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+  }

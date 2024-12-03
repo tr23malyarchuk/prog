@@ -1,7 +1,7 @@
 document.getElementById('object').addEventListener('change', updateEnterprise);
 document.getElementById('risk-form').addEventListener('submit', calculateRisk);
 
-function updateEnterprise() {
+function updateEnterprise() { // Оцінка ризику для здоров'я населення від забруднення атмосферного повітря 
     const object = document.getElementById('object').value;
     const enterpriseInput = document.getElementById('enterprise');
     let enterpriseName = '';
