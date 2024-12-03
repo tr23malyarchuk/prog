@@ -6,10 +6,10 @@
     <title>Екологічний моніторинг</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../../app/components/taxForm/toggleSection.js"></script>
-    <script src="../../app/components/table/calculateCancerRisk.js"></script>
-    <script src="../../app/components/table/calculateIndividualCancerRisk.js"></script>
-    <script src="../../app/components/table/calculateHQ.js"></script>
-    <script src="../../app/components/table/calculatePCR.js"></script>
+    <script src="../../app/components/taxForm/calculateCancerRisk.js"></script>
+    <script src="../../app/components/taxForm/calculateIndividualCancerRisk.js"></script>
+    <script src="../../app/components/taxForm/calculateHQ.js"></script>
+    <script src="../../app/components/taxForm/calculatePCR.js"></script>
   </head>
   <body>
     <h1>Екологічний моніторинг</h1>
@@ -121,7 +121,7 @@
     <form id="cancer-risk-form" class="tax-form">
         <h2>Оцінка ризику розвитку канцерогенних ефектів</h2>
         <label for="conc-outside">Концентрація речовини в атмосфері (Ca), мг/куб.м:</label>
-        <input type="number" id="conc-outside" required>
+        <input type="number" id="conc-outside" step="0.01" required>
         
         <label for="time-outside">Час, що проводиться поза приміщенням (Tout), год/доба:</label>
         <input type="number" id="time-outside" required>
@@ -130,7 +130,7 @@
         <input type="number" id="time-inside" required>
         
         <label for="vent-outside">Швидкість дихання поза приміщенням (Vout), куб.м/год:</label>
-        <input type="number" id="vent-outside" required>
+        <input type="number" id="vent-outside" step="0.01" required>
         
         <label for="frequency">Частота впливу (EF), днів/рік:</label>
         <input type="number" id="frequency" required>
@@ -194,9 +194,9 @@
   <div id="pcr-result" class="tax-result"></div>
 </div>
 
+<script src="../../app/components/taxForm/calculateRisk.js"></script>
+<script src="../../app/components/taxForm/calculateNonCanceric.js"></script>
 <script src="../../app/components/table/event-listeners/num-chemicals.js"></script>
-<script src="../../app/components/table/calculateNonCanceric.js"></script>
-<script src="../../app/components/table/calculateRisk.js"></script>
-<script src="../../app/components/table/calculateCombinedCancerRisk.js"></script>
+<script src="../../app/components/taxForm/calculateCombinedCancerRisk.js"></script>
 </body>
 </html>
