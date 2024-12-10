@@ -128,7 +128,7 @@ app.get('/data/air-risk', (req, res) => {
 app.post('/saveData_about_m_atmos', (req, res) => {
     const { production, substance, rBi, rBnorm, qv, T, year, mi } = req.body;
     const query = `
-        INSERT INTO emissions (production, substance, rBi, rBnorm, qv, T, year, mi)
+        INSERT INTO emissions_atmos_lab4 (production, substance, rBi, rBnorm, qv, T, year, mi)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const params = [production, substance, rBi, rBnorm, qv, T, year, mi];
