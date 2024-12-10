@@ -25,36 +25,26 @@ function calculateMi() {
     document.getElementById('result').innerText = mi.toFixed(6);
 }
 
-function saveData() {
-    const production = document.getElementById('production').value;
-    const substance = document.getElementById('substance').value;
-    const rBi = parseFloat(document.getElementById('rBi').value);
-    const rBnorm = parseFloat(document.getElementById('rBnorm').value);
-    const qv = parseFloat(document.getElementById('qv').value);
-    const T = parseFloat(document.getElementById('T').value);
-    const year = parseInt(document.getElementById('year').value);
-    const mi = 3.6e-6 * (rBi - rBnorm) * qv * T;
+function saveData_about_m_atmos() {
+    const formData = {
+        production: document.getElementById('production').value,
+        substance: document.getElementById('substance').value,
+        rBi: document.getElementById('rBi').value,
+        rBnorm: document.getElementById('rBnorm').value,
+        qv: document.getElementById('qv').value,
+        T: document.getElementById('T').value,
+        year: document.getElementById('year').value,
+        mi: document.getElementById('result').textContent
+    };
 
-    if (!production || !substance || isNaN(rBi) || isNaN(rBnorm) || isNaN(qv) || isNaN(T) || isNaN(year)) {
-        alert('Будь ласка, введіть всі необхідні дані.');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('production', production);
-    formData.append('substance', substance);
-    formData.append('rBi', rBi);
-    formData.append('rBnorm', rBnorm);
-    formData.append('qv', qv);
-    formData.append('T', T);
-    formData.append('year', year);
-    formData.append('mi', mi);
-
-    fetch('../../server/PHP/save_data_lab4.php', {
+    fetch('http://localhost:3000/saveData_about_m_atmos', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
     })
-    .then(response => response.text())
-    .then(data => alert(data))
-    .catch(error => console.error('Помилка:', error));
+    .then(response => response.json())
+    .then(data => alert('Дані збережено!'))
+    .catch(error => console.error('Помилка при збереженні:', error));
 }
