@@ -1,13 +1,14 @@
-function toggleSection(sectionId) {
+ // Функція для перемикання видимості секції
+ function toggleSection(sectionId) {
     const form = document.getElementById('emissionForm');
     
-    // Перевіряємо, чи форма вже видима
-    if (form.classList.contains('hidden')) {
-        // Якщо форма схована, показуємо її
-        form.classList.remove('hidden');
-    } else {
-        // Якщо форма вже відкрита, ховаємо її
-        form.classList.add('hidden');
+    // Якщо вибрана секція є активною, показуємо/ховаємо форму
+    if (sectionId === 'calc-m-atmos') {
+        if (form.classList.contains('hidden')) {
+            form.classList.remove('hidden'); // Показати форму
+        } else {
+            form.classList.add('hidden'); // Сховати форму
+        }
     }
 }
 function calculateMi() {
