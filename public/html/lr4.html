@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Екологічний моніторинг</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <h1>Екологічний моніторинг</h1>
+
+    <div class="button-container">
+        <div class="toggle-container">
+            <button onclick="toggleSection('calc-m-atmos')">Розрахунок маси наднормативних викидів забруднюючих речовин в атмосферне повітря</button>
+        </div>
+        <div class="toggle-container">
+            <button onclick="toggleSection('calc-m-water')">Розрахунок маси наднормативного скиду забруднюючої речовини у водний об'єкт</button>
+        </div>
+        <div class="toggle-container">
+          <button onclick="toggleSection('calc-damage-atmos')">Розрахунок розмірів відшкодування збитків за наднормативні викиди забруднюючих речовин  в атмосферне повітря</button>
+        </div>      
+        <div class="toggle-container">
+          <button onclick="toggleSection('calc-damage-water')">Розрахунок розмірів відшкодування збитків, заподіяних водним об'єктам</button>
+        </div>
+    </div>
+
+
+    <form id="emissionForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Виробництво</th>
+                    <th>Назва речовини</th>
+                    <th>rB<sub>i</sub> (мг/м³)</th>
+                    <th>rB<sub>норм</sub> (мг/м³)</th>
+                    <th>qv (м³/с)</th>
+                    <th>T (год)</th>
+                    <th>Рік</th>
+                    <th>mi (тонн)</th>
+                    <th>Розрахувати</th>
+                    <th>Зберегти</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" id="production" name="production"></td>
+                    <td><input type="text" id="substance" name="substance"></td>
+                    <td><input type="number" id="rBi" name="rBi" step="any"></td>
+                    <td><input type="number" id="rBnorm" name="rBnorm" step="any"></td>
+                    <td><input type="number" id="qv" name="qv" step="any"></td>
+                    <td><input type="number" id="T" name="T" step="any"></td>
+                    <td><input type="number" id="year" name="year" step="1"></td>
+                    <td id="result">-</td>
+                    <td><button type="button" onclick="calculateMi()">Розрахувати</button></td>
+                    <td><button type="button" onclick="saveData()">Зберегти</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+
+
+
+
+
+
+
+    <script src="../../app/components/table/calc-m-atmos.js"></script>
+</body>
+</html>
