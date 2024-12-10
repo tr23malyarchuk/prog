@@ -402,3 +402,6 @@ tr:hover {
     border: 1px solid #ddd;
     color: #333;
   }
+  .hidden {
+    display: none;
+}

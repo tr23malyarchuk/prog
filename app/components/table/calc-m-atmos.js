@@ -1,14 +1,17 @@
  // Функція для перемикання видимості секції
  function toggleSection(sectionId) {
-    const form = document.getElementById('emissionForm');
+    const form = document.getElementById(sectionId); // Використовуємо змінну sectionId
     
-    // Якщо вибрана секція є активною, показуємо/ховаємо форму
-    if (sectionId === 'calc-m-atmos') {
+    // Перевірка на існування елемента
+    if (form) {
+        // Якщо вибрана секція є активною, показуємо/ховаємо форму
         if (form.classList.contains('hidden')) {
             form.classList.remove('hidden'); // Показати форму
         } else {
             form.classList.add('hidden'); // Сховати форму
         }
+    } else {
+        console.error('Елемент з ID ' + sectionId + ' не знайдено');
     }
 }
 function calculateMi() {
@@ -27,25 +30,45 @@ function calculateMi() {
 }
 
 function saveData_about_m_atmos() {
-    const formData = {
-        production: document.getElementById('production').value,
-        substance: document.getElementById('substance').value,
-        rBi: document.getElementById('rBi').value,
-        rBnorm: document.getElementById('rBnorm').value,
-        qv: document.getElementById('qv').value,
-        T: document.getElementById('T').value,
-        year: document.getElementById('year').value,
-        mi: document.getElementById('result').textContent
+    const production = document.getElementById('production').value;
+    const substance = document.getElementById('substance').value;
+    const rBi = parseFloat(document.getElementById('rBi').value);
+    const rBnorm = parseFloat(document.getElementById('rBnorm').value);
+    const qv = parseFloat(document.getElementById('qv').value);
+    const T = parseFloat(document.getElementById('T').value);
+    const year = parseInt(document.getElementById('year').value);
+    const mi = parseFloat(document.getElementById('result').innerText);
+
+    if (isNaN(rBi) || isNaN(rBnorm) || isNaN(qv) || isNaN(T) || isNaN(year) || isNaN(mi)) {
+        alert('Будь ласка, введіть всі необхідні дані.');
+        return;
+    }
+
+    const data = {
+        production,
+        substance,
+        rBi,
+        rBnorm,
+        qv,
+        T,
+        year,
+        mi
     };
 
-    fetch('http://localhost:3000/saveData_about_m_atmos', {
+    fetch('http://localhost:3006/saveData_about_m_atmos', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => alert('Дані збережено!'))
-    .catch(error => console.error('Помилка при збереженні:', error));
+    .then(result => {
+        console.log('Data saved successfully:', result);
+        showNotification('Дані успішно збережено!', 'green');
+    })
+    .catch(error => {
+        console.error('Error saving data:', error);
+        showNotification('Помилка при збереженні даних.', 'red');
+    });
 }
