@@ -135,6 +135,7 @@ app.post('/saveData_about_m_atmos', (req, res) => {
 
     executeQuery(res, query, params);
 });
+
 app.listen(3006, () => {
     console.log('Сервер працює на порті 3006');
 });

@@ -72,3 +72,34 @@ function saveData_about_m_atmos() {
         showNotification('Помилка при збереженні даних.', 'red');
     });
 }
+function showNotification(message, color) {
+    const notification = document.createElement('div');
+    notification.style.backgroundColor = color;
+    notification.style.color = 'white';
+    notification.style.padding = '10px';
+    notification.style.position = 'fixed';
+    notification.style.top = '10px';
+    notification.style.right = '10px';
+    notification.style.zIndex = '1000';
+    notification.innerText = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000); // Сповіщення буде зникати через 3 секунди
+}
+function calculateMi() {
+    const rBi = parseFloat(document.getElementById('rBi').value);
+    const rBnorm = parseFloat(document.getElementById('rBnorm').value);
+    const qv = parseFloat(document.getElementById('qv').value);
+    const T = parseFloat(document.getElementById('T').value);
+
+    if (isNaN(rBi) || isNaN(rBnorm) || isNaN(qv) || isNaN(T)) {
+        alert('Будь ласка, введіть всі необхідні дані.');
+        return;
+    }
+
+    const mi = 3.6e-6 * (rBi - rBnorm) * qv * T;
+    document.getElementById('result').innerText = mi.toFixed(6);
+}
