@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛР5 - Оцінка шкоди від надзвичайних ситуацій та під час воєнного стану</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../../app/components/taxForm/toggleSection.js"></script>
+    <script src="../../app/components/taxForm/updateEnterprise.js"></script>
+    <script src="../../app/components/emergencyForm/emergencyDamageCalculation.js"></script>
+    <script src="../../app/components/emergencyForm/waterDamageCalculation.js"></script>
+    <script src="../../app/components/emergencyForm/calculateDamageY.js"></script>
+    <script src="../../app/components/emergencyForm/calculateDamageYi.js"></script>
+    <script src="../../app/components/emergencyForm/calculateAi.js"></script>
+    <script src="../../app/components/emergencyForm/calculateSoilDamage.js"></script>
+    <script src="../../app/components/emergencyForm/calculateReclamationCost.js"></script>
+  </head>
+  <body>
+    <h1>ЛР5 - Оцінка шкоди від надзвичайних ситуацій та під час воєнного стану</h1>
+    <div class="button-container">
+      <div class="toggle-container">
+        <button onclick="toggleSection('emergency-damage-calc')">Оцінка шкоди заподіяної внаслідок надзвичайних ситуацій</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('water-damage-calc')">Оцінка збитків від скиду забруднюючих речовин у водний об'єкт</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('damage-calc')">Оцінка питомого економічного збитку від забруднення водних ресурсів</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('dynamic-risk-calc')">Оцінка проіндексованого питомого економічного збитку від забруднення водних ресурсів</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('ai-calc')">Оцінка безрозмірного показника відносної небезпечності</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('soil-damage-calc')">Оцінка розміру шкоди від забруднення грунтів</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('reclamation-cost-calc')">Оцінка вартості рекультивації земель</button>
+      </div>
+    </div>
+    <div id="emergency-damage-calc" class="tab-content" style="display: none;">
+        <h2>Оцінка шкоди заподіяної внаслідок надзвичайних ситуацій</h2>
+        <form id="emergency-damage-form" class="tax-form">
+          <label for="Mi">Маса викиду (Mi), т:</label>
+          <input type="number" id="Mi" step="0.01" required>
+  
+          <label for="Sp">Площа ураження (Sp), км²:</label>
+          <input type="number" id="Sp" step="0.01" required>
+  
+          <label for="Kneb">Коефіцієнт небезпеки (Kneb):</label>
+          <input type="number" id="Kneb" step="0.01" required>
+  
+          <label for="Kv">Коефіцієнт виду забруднення (Kv):</label>
+          <input type="number" id="Kv" step="0.01" required>
+  
+          <label for="Kmp">Коефіцієнт місцевого впливу (Kmp):</label>
+          <input type="number" id="Kmp" step="0.01" required>
+  
+          <label for="Kpp">Коефіцієнт природного середовища (Kpp):</label>
+          <input type="number" id="Kpp" step="0.01" required>
+  
+          <select id="pollutant-name" required>
+            <option value="">Оберіть або введіть забруднюючу речовину</option>
+            <option value="Формальдегід">Формальдегід</option>
+            <option value="Азоту оксид">Азоту оксид</option>
+            <option value="Аміак">Аміак</option>
+            <option value="Ангідрид сірчистий">Ангідрид сірчистий</option>
+            <option value="Ацетон">Ацетон</option>
+            <option value="Бензопірен">Бензопірен</option>
+            <option value="Бутилацетат">Бутилацетат</option>
+            <option value="Ванадію п’ятиокис">Ванадію п’ятиокис</option>
+            <option value="Водень хлористий">Водень хлористий</option>
+            <option value="Вуглецю окис">Вуглецю окис</option>
+            <option value="Вуглеводні">Вуглеводні</option>
+            <option value="Газоподібні фтористі сполуки">Газоподібні фтористі сполуки</option>
+            <option value="Тверді речовини">Тверді речовини</option>
+            <option value="Кадмій">Кадмій</option>
+            <option value="Марганець">Марганець</option>
+            <option value="Нікель">Нікель</option>
+            <option value="Озон">Озон</option>
+            <option value="Ртуть">Ртуть</option>
+            <option value="Свинець">Свинець</option>
+            <option value="Сірководень">Сірководень</option>
+            <option value="Сірковуглець">Сірковуглець</option>
+            <option value="Спирт">Спирт</option>
+            <option value="Стирол">Стирол</option>
+            <option value="Фенол">Фенол</option>
+            <option value="Хром">Хром</option>
+            <option value="Азот амонійний">Азот амонійний</option>
+            <option value="БСК 5">БСК 5</option>
+            <option value="Завислі речовини">Завислі речовини</option>
+            <option value="Нафтопродукти">Нафтопродукти</option>
+            <option value="Нітрати">Нітрати</option>
+            <option value="Нітрити">Нітрити</option>
+            <option value="Сульфати">Сульфати</option>
+            <option value="Фосфати">Фосфати</option>
+            <option value="Хлориди">Хлориди</option>
+            <option value="Завислі речовини">Завислі речовини</option>
+            <option value="custom">Інше (ввести вручну)</option>
+          </select>
+  
+          <label for="object">Об'єкт:</label>
+          <select id="object" required onchange="updateEnterprise()">
+            <option value="1">Рівне</option>
+            <option value="2">Хмельницьк</option>
+            <option value="3">Бровари</option>
+          </select>
+  
+          <label for="enterprise">Підприємство:</label>
+          <input type="text" id="enterprise" readonly>
+  
+          <label for="year">Рік:</label>
+          <select id="year" required>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+          </select>
+  
+          <button type="button" onclick="emergencyDamageCalculation()">Розрахувати збитки</button>
+        </form>
+        <div id="emergency-damage-result" class="tax-result"></div>
+      </div>      
+    <div id="water-damage-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка шкоди заподіяної водними забруднювачами</h2>
+      <form id="water-damage-form" class="tax-form">
+        <label for="K_cat">Коефіцієнт К_cat:</label>
+        <input type="number" id="K_cat" required>
+        <label for="K_r">Коефіцієнт K_r:</label>
+        <input type="number" id="K_r" required>
+        <label for="K_3">Коефіцієнт K_3:</label>
+        <input type="number" id="K_3" required>
+        <h3>Дані про забруднювачів:</h3>
+        <label for="Mi1">Маса викиду 1 (Mi1), т:</label>
+        <input type="number" id="Mi1" required>
+        <label for="Yi1">Площа ураження 1 (Yi1), км²:</label>
+        <input type="number" id="Yi1" required>
+        <label for="Mi2">Маса викиду 2 (Mi2), т:</label>
+        <input type="number" id="Mi2" required>
+        <label for="Yi2">Площа ураження 2 (Yi2), км²:</label>
+        <input type="number" id="Yi2" required>
+        <button type="button" onclick="waterDamageCalculation()">Розрахувати шкоду</button>
+      </form>
+      <div id="water-damage-result" class="tax-result"></div>
+    </div>
+    <div id="damage-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка економічних збитків від забруднення</h2>
+      <form id="damage-form" class="tax-form">
+        <label for="Y">Значення Y (UAH/т):</label>
+        <input type="number" id="Y" required>
+        <label for="A2">Значення A (специфічний коефіцієнт):</label>
+        <input type="number" id="A2" required>
+        <button type="button" onclick="calculateDamageY()">Розрахувати збитки</button>
+      </form>
+      <div id="damage-result" class="tax-result">
+        <p id="damage-details"></p>
+      </div>
+    </div>
+    <div id="dynamic-risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка проіндексованого питомого економічного збитку від забруднення водних ресурсів</h2>
+      <form id="dynamic-risk-form" class="tax-form">
+        <label for="Y_N">Значення Y_N (UAH/т):</label>
+        <input type="number" id="Y_N" required>
+        <label for="I">Індекс (I), %:</label>
+        <input type="number" id="I" required>
+        <button type="button" onclick="calculateDamageYi()">Розрахувати збитки</button>
+      </form>
+      <div id="dynamic-risk-result" class="tax-result">
+        <p id="dynamic-risk-details"></p>
+      </div>
+    </div>
+    <div id="ai-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка безрозмірного показника відносної небезпечності</h2>
+      <form id="ai-form" class="tax-form">
+        <label for="MAC_i">Введіть значення MAC_i:</label>
+        <input type="number" id="MAC_i" required>
+        <button type="button" onclick="calculateAi()">Розрахувати Ai</button>
+      </form>
+      <div id="ai-result" class="tax-result">
+        <p id="ai-value"></p>
+      </div>
+    </div>
+    <div id="soil-damage-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка шкоди від забруднення ґрунту</h2>
+      <form id="soil-damage-form" class="tax-form">
+        <label for="A1">Площа (A), м²:</label>
+        <input type="number" id="A1" required>
+        <label for="NPZ">НПЗ (NPZ):</label>
+        <input type="number" id="NPZ" required>
+        <label for="PD">Щільність забруднення (PD):</label>
+        <input type="number" id="PD" required>
+        <label for="KN">Коефіцієнт небезпеки (KN):</label>
+        <input type="number" id="KN" required>
+        <label for="Ko">Коефіцієнт органічності (Ko):</label>
+        <input type="number" id="Ko" required>
+        <label for="Vr">Вартість шкоди (Vr), грн:</label>
+        <input type="number" id="Vr" required>
+        <button type="button" onclick="calculateSoilDamage()">Розрахувати шкоду</button>
+      </form>
+      <div id="soil-damage-result" class="tax-result">
+        <p id="soil-damage-details"></p>
+      </div>
+    </div>
+    <div id="reclamation-cost-calc" class="tab-content" style="display: none;">
+      <h2>Розрахунок вартості рекультивації</h2>
+      <form id="reclamation-cost-form" class="tax-form">
+        <label for="C1">C1 (параметр 1):</label>
+        <input type="number" id="C1" required>
+        <label for="C2">C2 (параметр 2):</label>
+        <input type="number" id="C2" required>
+        <label for="Kc">Коефіцієнт (Kc):</label>
+        <input type="number" id="Kc" required>
+        <button type="button" onclick="calculateReclamationCost()">Розрахувати вартість рекультивації</button>
+      </form>
+      <div id="reclamation-cost-result" class="tax-result">
+        <p id="reclamation-cost-details"></p>
+      </div>
+    </div>
+  </body>
+</html>

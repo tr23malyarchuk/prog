@@ -6,66 +6,185 @@
     <title>Екологічний моніторинг</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../../app/components/table/calc-m-atmos.js"></script>
+    <script src="../../app/components/table/lossesForm.js"></script>
 </head>
 <body>
     <h1>Екологічний моніторинг</h1>
 
     <div class="button-container">
         <div class="toggle-container">
-            <button onclick="toggleSection('calc-m-atmos')">Розрахунок маси наднормативних викидів забруднюючих речовин в атмосферне повітря</button>
-        </div>
-        <div class="toggle-container">
-            <button onclick="toggleSection('calc-m-water')">Розрахунок маси наднормативного скиду забруднюючої речовини у водний об'єкт</button>
-        </div>
-        <div class="toggle-container">
-          <button onclick="toggleSection('calc-damage-atmos')">Розрахунок розмірів відшкодування збитків за наднормативні викиди забруднюючих речовин  в атмосферне повітря</button>
+          <button onclick="toggleSection('lossesForm')">Розрахунок розмірів відшкодування збитків за наднормативні викиди забруднюючих речовин  в атмосферне повітря</button>
         </div>      
         <div class="toggle-container">
-          <button onclick="toggleSection('calc-damage-water')">Розрахунок розмірів відшкодування збитків, заподіяних водним об'єктам</button>
+          <button onclick="toggleSection('calculation-form')">Розрахунок розмірів відшкодування збитків, заподіяних водним об'єктам</button>
         </div>
     </div>
 
 
-    <form id="calc-m-atmos" class="hidden">
-        <table>
-            <thead>
-                <tr>
-                    <th>Виробництво</th>
-                    <th>Назва речовини</th>
-                    <th>rB<sub>i</sub> (мг/м³)</th>
-                    <th>rB<sub>норм</sub> (мг/м³)</th>
-                    <th>qv (м³/с)</th>
-                    <th>T (год)</th>
-                    <th>Рік</th>
-                    <th>mi (тонн)</th>
-                    <th>Розрахувати</th>
-                    <th>Зберегти</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" id="production" name="production"></td>
-                    <td><input type="text" id="substance" name="substance"></td>
-                    <td><input type="number" id="rBi" name="rBi" step="any"></td>
-                    <td><input type="number" id="rBnorm" name="rBnorm" step="any"></td>
-                    <td><input type="number" id="qv" name="qv" step="any"></td>
-                    <td><input type="number" id="T" name="T" step="any"></td>
-                    <td><input type="number" id="year" name="year" step="1"></td>
-                    <td id="result">-</td>
-                    <td><button type="button" onclick="calculateMi()">Розрахувати</button></td>
-                    <td><button type="button" onclick="saveData_about_m_atmos()">Зберегти</button></td>
-                </tr>
-            </tbody>
-        </table>
+   
+    <form id="lossesForm" class="hidden">
+        <h1>Розрахунок розміру збитків</h1>
+    
+        <!-- Назва підприємства -->
+        <label for="enterprise">Назва підприємства:</label>
+        <select id="enterprise" name="enterprise" required>
+            <option value="Хмельницька АЕС">Хмельницька АЕС</option>
+            <option value="ПАТ Рівнеазот">ПАТ "Рівнеазот"</option>
+            <option value="КП «Броваритепловодоенергія»">КП «Броваритепловодоенергія»</option>
+        </select><br><br>
+    
+        <!-- Назва речовини -->
+        <label for="substance">Назва речовини:</label>
+        <select id="substance" name="substance" required onchange="updateConcentrationValues()">
+            <option value="Пил">Пил</option>
+            <option value="Діоксид сірки">Діоксид сірки</option>
+            <option value="Оксид азоту">Оксид азоту</option>
+            <option value="Фенол">Фенол</option>
+            <option value="Аміак">Аміак</option>
+            <option value="Фтористий водень">Фтористий водень</option>
+            <option value="Хлористий водень">Хлористий водень</option>
+            <option value="Формальдегід">Формальдегід</option>
+            <option value="Залізо">Залізо</option>
+            <option value="Кадмій">Кадмій</option>
+            <option value="Марагнець">Марагнець</option>
+            <option value="Мідь">Мідь</option>
+        </select><br><br>
+    
+        <!-- Рік -->
+        <label for="year2">Рік:</label>
+        <select id="year2" name="year" required onchange="updateMinimumWage()">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select><br><br>
+    
+        <!-- Вхідні дані для розрахунку маси наднормативного викиду -->
+        <label for="rBi">rB<sub>i</sub> (середнє арифметичне значення результатів вимірювань масової концентрації i-тої забруднюючої речовини трьох послідовно відібраних об'єднаних проб, мг/м³):</label>
+        <input type="number" id="rBi" name="rBi" step="any" required onchange="calculateMi();"><br><br>
+        
+        <label for="rBnorm">rB<sub>норм</sub> (значення затвердженого нормативу викиду i-тої забруднюючої речовини, наведеного в дозволі, мг/м³):</label>
+        <input type="number" id="rBnorm" name="rBnorm" step="any" required onchange="calculateMi();"><br><br>
+        
+        <label for="qv">qv (значення об'ємної витрати газопилового потоку від джерела викиду i-тої забруднюючої речовини, приведене до нормальних умов, м³/с):</label>
+        <input type="number" id="qv" name="qv" step="any" required onchange="calculateMi();"><br><br>
+        
+        <label for="T">T (час роботи джерела викиду i-тої забруднюючої речовини в режимі наднормативного викиду, год.):</label>
+        <input type="number" id="T" name="T" step="any" required onchange="calculateMi();"><br><br>
+        
+        <label for="mass">Маса наднормативного викиду (м<sub>i</sub>, кг):</label>
+        <input type="number" id="mass" name="mass" step="any" required readonly><br><br>
+    
+        <!-- Розмір мінімальної заробітної плати -->
+        <label for="minimumWage">Розмір мінімальної заробітної плати (грн):</label>
+        <input type="number" id="minimumWage" name="minimumWage" step="0.01" required><br><br>
+    
+        <!-- Середньодобова гранично допустима концентрація -->
+        <label for="GDK">Середньодобова гранично допустима концентрація (мг/м³):</label>
+        <input type="number" id="GDK" name="GDK" step="0.01" required><br><br>
+    
+        <!-- Чисельність жителів населеного пункту -->
+        <label for="populationSize">Чисельність жителів населеного пункту:</label>
+        <select id="populationSize" name="populationSize" required>
+            <option value="100">до 100 тис.</option>
+            <option value="250">100,1 - 250 тис.</option>
+            <option value="500">250,1 - 500 тис.</option>
+            <option value="1000">500,1 - 1000 тис.</option>
+            <option value="1000+">більше 1000 тис.</option>
+        </select><br><br>
+    
+        <!-- Народногосподарське значення населеного пункту -->
+        <label for="economicImportance">Народногосподарське значення населеного пункту:</label>
+        <select id="economicImportance" name="economicImportance" required>
+            <option value="local">Місцеве значення</option>
+            <option value="industrial">Промислове</option>
+            <option value="resort">Курортне</option>
+        </select><br><br>
+    
+        <!-- Середньорічна концентрація забруднюючої речовини -->
+        <label for="annualConcentration">Середньорічна концентрація (мг/м³):</label>
+        <input type="number" id="annualConcentration" name="annualConcentration" step="0.01" required><br><br>
+    
+        <!-- Кнопка для розрахунку -->
+        <input type="button" value="Розрахувати та зберегти" onclick="calculateLossesAndSave()"> 
+        <!-- Результат -->
+        <h2>Результат</h2>
+        <p id="lossResult"></p>
     </form>
+    
+   
+    <form id="calculation-form" class="hidden">
+        <h2>Розрахунок розміру відшкодування збитків</h2> <!-- Назва підприємства -->
+        <label for="enterprise">Назва підприємства:</label>
+        <select id="enterprise" name="enterprise" required>
+            <option value="Хмельницька АЕС">Хмельницька АЕС</option>
+            <option value="ПАТ Рівнеазот">ПАТ "Рівнеазот"</option>
+            <option value="КП «Броваритепловодоенергія»">КП «Броваритепловодоенергія»</option>
+        </select><br><br>
 
+    
+       <!-- Вибір коефіцієнта категорії водного об'єкта -->
+    <label for="K_cat">Коефіцієнт категорії водного об'єкта (К_кат):</label>
+    <select id="K_cat">
+        <option value="1.5">Господарсько-побутового використання (1,5)</option>
+        <option value="2.5">Для цілей рибного господарства (2,5)</option>
+        <option value="3.0">Питного використання (3,0)</option>
+        <option value="3.5">Внутрішні морські води (3,5)</option>
+        <option value="4.5">Природно-заповідний фонд (4,5)</option>
+        <option value="5.0">Підземні води (5,0)</option>
+    </select>
 
+    <!-- Вибір регіонального коефіцієнта дефіцитності водних ресурсів -->
+    <label for="K_R">Регіональний коефіцієнт дефіцитності водних ресурсів (К_Р):</label>
+    <select id="K_R">
+        <option value="1.00">Закарпатська (1.00)</option>
+        <option value="1.05">Івано-Франківська (1.05)</option>
+        <option value="1.06">Чернівецька (1.06)</option>
+        <option value="1.07">Тернопільська (1.07)</option>
+        <option value="1.10">Волинська (1.10)</option>
+        <option value="1.10">Житомирська (1.10)</option>
+        <option value="1.10">Львівська (1.10)</option>
+        <option value="1.10">Сумська (1.10)</option>
+        <option value="1.11">Хмельницька (1.11)</option>
+        <option value="1.11">Рівненська (1.11)</option>
+        <option value="1.11">Чернігівська (1.11)</option>
+        <option value="1.13">Кіровоградська (1.13)</option>
+        <option value="1.15">Полтавська (1.15)</option>
+        <option value="1.17">Вінницька (1.17)</option>
+        <option value="1.17">Черкаська (1.17)</option>
+        <option value="1.18">Луганська (1.18)</option>
+        <option value="1.19">Харківська (1.19)</option>
+        <option value="1.20">Миколаївська (1.20)</option>
+        <option value="1.21">Київська (1.21)</option>
+        <option value="1.24">Автономна Республіка Крим (1.24)</option>
+        <option value="1.26">Одеська (1.26)</option>
+        <option value="1.26">Донецька (1.26)</option>
+        <option value="1.28">Дніпропетровська (1.28)</option>
+        <option value="1.28">Запорізька (1.28)</option>
+        <option value="1.30">Херсонська (1.30)</option>
+    </select>
+    
+        <label for="m">Кількість забруднюючих речовин (m):</label>
+        <input type="number" id="m" required>
+    
+        <label for="year">Виберіть рік:</label>
+        <select id="yearSelect" onchange="updateValuesForYear()">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+         </select>
 
-
-
-
-
-
+          <div id="pollutants-container"></div>
+    
+        <button type="button" onclick="addPollutantFields()">Додати забруднюючі речовини</button>
+    
+        <button type="button" onclick="calculateCompensation()">Розрахувати відшкодування</button>
+        <!-- <button type="button" onclick="submitCalculationData()">Зберегти в базу даних</button> -->
+        <p id="resultat"></p>
+     </form>
+    
     <script src="../../app/components/table/calc-m-atmos.js"></script>
 </body>
 </html>

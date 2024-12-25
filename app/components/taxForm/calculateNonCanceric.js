@@ -1,6 +1,6 @@
 let chemicals = [];
 
-function addChemical() {
+function calculateNonCanceric() {
     const name = document.getElementById("chemical-name2").value;
     const hq = parseFloat(document.getElementById("hq-value").value.trim());
 
@@ -14,6 +14,13 @@ function addChemical() {
     if (isNaN(hq) || hq <= 0) {
         alert("Будь ласка, введіть коректне значення для HQ.");
         return; // Якщо HQ некоректне, вивести повідомлення і припинити функцію
+    }
+
+    // Перевірка, чи вже існує така хімічна речовина в списку
+    const existingChemical = chemicals.find(chemical => chemical.name === name);
+    if (existingChemical) {
+        alert("Ця хімічна речовина вже додана.");
+        return;
     }
 
     // Якщо все правильно, додаємо хімічну речовину в список
@@ -35,8 +42,13 @@ function updateChemicalList() {
 }
 
 function calculateHI() {
+    if (chemicals.length === 0) {
+        alert("Будь ласка, додайте хоча б одну хімічну речовину для розрахунку.");
+        return;
+    }
+
     const HI = chemicals.reduce((sum, chemical) => sum + chemical.hq, 0);
-    document.getElementById("result").textContent = `Індекс небезпеки (HI): ${HI.toFixed(2)}`;
+    document.getElementById("resulting").textContent = `Індекс небезпеки (HI): ${HI.toFixed(2)}`;
 }
 
 // Додавання слухача події на зміни в select

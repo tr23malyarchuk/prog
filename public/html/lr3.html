@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Екологічний моніторинг</title>
+    <title>ЛР3 - Оцінка ризиків</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../../app/components/taxForm/toggleSection.js"></script>
     <script src="../../app/components/taxForm/calculateCancerRisk.js"></script>
@@ -12,191 +12,156 @@
     <script src="../../app/components/taxForm/calculatePCR.js"></script>
   </head>
   <body>
-    <h1>Екологічний моніторинг</h1>
+    <h1>ЛР3 - Оцінка ризиків</h1>
     <div class="button-container">
-        <div class="toggle-container">
-            <button onclick="toggleSection('dynamic-risk-calc')">Оцінка ризику для здоров'я населення</button>
-        </div>
-        <div class="toggle-container">
-          <button onclick="toggleSection('non-cancer-risk-calc')">Оцінка ризику розвитку неканцерогенних ефектів</button>
-        </div>      
-        <div class="toggle-container">
-          <button onclick="toggleSection('risk-calc')">Оцінку ризику розвитку неканцерогенних ефектів за комбінованого впливу хімічних речовин </button>
-        </div>
-        <div class="toggle-container">
-          <button onclick="toggleSection('cancer-risk-calc')">Оцінка ризику розвитку канцерогенних ефектів</button>
-        </div>
-        <div class="toggle-container">
-          <button onclick="toggleSection('individual-cancer-risk-calc')">Оцінка індивідуального канцерогенного ризику</button>
-        </div> 
-        <div class="toggle-container">
-          <button onclick="toggleSection('combined-cancer-risk-calc')">Оцінка комбінованого канцерогенного ризику</button>
-        </div>
-        <div class="toggle-container">
-          <button onclick="toggleSection('pcr-calc')">Оцінка популяційного канцерогенного ризику (PCR)</button>
-        </div>   
+      <div class="toggle-container">
+        <button onclick="toggleSection('dynamic-risk-calc')">Оцінка ризику для здоров'я населення</button>
       </div>
-      <div id="dynamic-risk-calc" class="tab-content" style="display: none;">
-        <h2>Оцінка ризику для здоров'я населення</h2>
-        <form id="risk-form" class="tax-form">
-          <label for="object">Виберіть об'єкт:</label>
-          <select id="object" name="object" required>
-              <option value="rivne">Рівне</option>
-              <option value="khmelnytsky">Хмельницьк</option>
-              <option value="brovary">Бровари</option>
-          </select>
-          
-          <div id="enterprise-container">
-              <label for="enterprise">Підприємство:</label>
-              <input type="text" id="enterprise" readonly>
-          </div>
-  
-          <label for="pollutant">Виберіть забруднюючу речовину:</label>
-          <select id="pollutant" name="pollutant" required></select>
-  
-          <label for="year">Виберіть рік:</label>
-          <select id="year" name="year" required></select>
-  
-          <button type="submit">Розрахувати ризик</button>
+      <div class="toggle-container">
+        <button onclick="toggleSection('non-cancer-risk-calc')">Оцінка ризику розвитку неканцерогенних ефектів</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('risk-calc')">Оцінку ризику розвитку неканцерогенних ефектів за комбінованого впливу хімічних речовин </button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('cancer-risk-calc')">Оцінка ризику розвитку канцерогенних ефектів</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('individual-cancer-risk-calc')">Оцінка індивідуального канцерогенного ризику</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('combined-cancer-risk-calc')">Оцінка комбінованого канцерогенного ризику</button>
+      </div>
+      <div class="toggle-container">
+        <button onclick="toggleSection('pcr-calc')">Оцінка популяційного канцерогенного ризику (PCR)</button>
+      </div>
+    </div>
+    <div id="dynamic-risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка ризику для здоров'я населення</h2>
+      <form id="risk-form" class="tax-form">
+        <label for="object">Виберіть об'єкт:</label>
+        <select id="object" name="object" required>
+          <option value="rivne">Рівне</option>
+          <option value="khmelnytsky">Хмельницьк</option>
+          <option value="brovary">Бровари</option>
+        </select>
+        <div id="enterprise-container">
+          <label for="enterprise">Підприємство:</label>
+          <input type="text" id="enterprise" readonly>
+        </div>
+        <label for="pollutant">Виберіть забруднюючу речовину:</label>
+        <select id="pollutant" name="pollutant" required></select>
+        <label for="year">Виберіть рік:</label>
+        <select id="year" name="year" required></select>
+        <button type="submit">Розрахувати ризик</button>
       </form>
-  
       <div id="result" class="tax-result">
-          <p id="risk-details"></p>
+        <p id="risk-details"></p>
       </div>
-      </div>
-         
-<div id="non-cancer-risk-calc" class="tab-content" style="display: none;">
-    <h2>Оцінка ризику розвитку неканцерогенних ефектів</h2>
-    <form id="non-cancer-risk-form" class="tax-form">
-      <label for="chemical-name1">Назва хімічної речовини:</label>
-      <select id="chemical-name1" required>
-        <option value="">Оберіть хімічну речовину</option>
-        <option value="Ацетальгідрид">Ацетальгідрид</option>
-        <option value="Бензол">Бензол</option>
-        <option value="Формальдегід">Формальдегід</option>
-        <option value="Діоксид азоту">Діоксид азоту</option>
-        <option value="Оксиди сірки">Оксиди сірки</option>
-        <option value="ПМ 2.5">ПМ 2.5</option>
-      </select>
-  
-      <label for="concentration">Рівень впливу речовини (C_i), мг/куб.м:</label>
-      <input type="number" id="concentration" required>
-  
-      <label for="safe-level">Безпечний рівень впливу (RfC), мг/куб.м:</label>
-      <input type="number" id="safe-level" required>
-  
-      <button type="button" onclick="calculateHQ()">Розрахувати коефіцієнт небезпеки (HQ)</button>
-    </form>
-    
-    <div id="non-cancer-risk-result" class="tax-result"></div>
-  </div>    
-  <div id="risk-calc" class="tab-content" style="display: none;">
-    <h2>Оцінка ризику неканцерогенних ефектів за комбінованого впливу речовин</h2>
-    <form id="risk-form1">
-      <label for="chemical-name2">Назва хімічної речовини:</label>
-      <select id="chemical-name2" required>
-        <option value="">Оберіть хімічну речовину</option>
-        <option value="Ацетальгідрид">Ацетальгідрид</option>
-        <option value="Бензол">Бензол</option>
-        <option value="Формальдегід">Формальдегід</option>
-        <option value="Діоксид азоту">Діоксид азоту</option>
-        <option value="Оксиди сірки">Оксиди сірки</option>
-        <option value="ПМ 2.5">ПМ 2.5</option>
-      </select>      
-      
-      <label for="hq-value">Коефіцієнт небезпеки (HQ):</label>
-      <input type="number" id="hq-value" step="0.01" required>
-      
-      <button type="button" onclick="addChemical()">Додати хімічну речовину</button>
-    </form>
-  
-    <h3>Компоненти:</h3>
-    <ul id="chemical-list"></ul>
-  
-    <button type="button" onclick="calculateHI()">Розрахувати індекс небезпеки (HI)</button>
-  
-    <div id="result" class="tax-result"></div>
-  </div>
-  <div id="cancer-risk-calc" class="tab-content" style="display: none;">
-    <form id="cancer-risk-form" class="tax-form">
+    </div>
+    <div id="non-cancer-risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка ризику розвитку неканцерогенних ефектів</h2>
+      <form id="non-cancer-risk-form" class="tax-form">
+        <label for="chemical-name1">Назва хімічної речовини:</label>
+        <select id="chemical-name1" required>
+          <option value="">Оберіть хімічну речовину</option>
+          <option value="Ацетальгідрид">Ацетальгідрид</option>
+          <option value="Бензол">Бензол</option>
+          <option value="Формальдегід">Формальдегід</option>
+          <option value="Діоксид азоту">Діоксид азоту</option>
+          <option value="Оксиди сірки">Оксиди сірки</option>
+          <option value="ПМ 2.5">ПМ 2.5</option>
+        </select>
+        <label for="concentration">Рівень впливу речовини (C_i), мг/куб.м:</label>
+        <input type="number" id="concentration" required>
+        <label for="safe-level">Безпечний рівень впливу (RfC), мг/куб.м:</label>
+        <input type="number" id="safe-level" required>
+        <button type="button" onclick="calculateHQ()">Розрахувати коефіцієнт небезпеки (HQ)</button>
+      </form>
+      <div id="non-cancer-risk-result" class="tax-result"></div>
+    </div>
+    <div id="risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка ризику неканцерогенних ефектів за комбінованого впливу речовин</h2>
+      <form id="risk-form1">
+        <label for="chemical-name2">Назва хімічної речовини:</label>
+        <select id="chemical-name2" required>
+          <option value="">Оберіть хімічну речовину</option>
+          <option value="Ацетальгідрид">Ацетальгідрид</option>
+          <option value="Бензол">Бензол</option>
+          <option value="Формальдегід">Формальдегід</option>
+          <option value="Діоксид азоту">Діоксид азоту</option>
+          <option value="Оксиди сірки">Оксиди сірки</option>
+          <option value="ПМ 2.5">ПМ 2.5</option>
+        </select>
+        <label for="hq-value">Коефіцієнт небезпеки (HQ):</label>
+        <input type="number" id="hq-value" step="0.01" required>
+        <button type="button" onclick="calculateNonCanceric()">Додати хімічну речовину</button>
+      </form>
+      <h3>Компоненти:</h3>
+      <ul id="chemical-list"></ul>
+      <button type="button" onclick="calculateHI()">Розрахувати індекс небезпеки (HI)</button>
+      <div id="resulting" class="tax-result"></div>
+    </div>
+    <div id="cancer-risk-calc" class="tab-content" style="display: none;">
+      <form id="cancer-risk-form" class="tax-form">
         <h2>Оцінка ризику розвитку канцерогенних ефектів</h2>
         <label for="conc-outside">Концентрація речовини в атмосфері (Ca), мг/куб.м:</label>
         <input type="number" id="conc-outside" step="0.01" required>
-        
         <label for="time-outside">Час, що проводиться поза приміщенням (Tout), год/доба:</label>
         <input type="number" id="time-outside" required>
-        
         <label for="time-inside">Час, що проводиться у приміщенні (Tin), год/доба:</label>
         <input type="number" id="time-inside" required>
-        
         <label for="vent-outside">Швидкість дихання поза приміщенням (Vout), куб.м/год:</label>
         <input type="number" id="vent-outside" step="0.01" required>
-        
         <label for="frequency">Частота впливу (EF), днів/рік:</label>
         <input type="number" id="frequency" required>
-        
         <label for="exposure-duration">Тривалість впливу (ED), років:</label>
         <input type="number" id="exposure-duration" required>
-        
         <label for="body-weight">Маса тіла (BW), кг:</label>
         <input type="number" id="body-weight" required>
-        
         <label for="average-time">Період осереднення експозиції (AT), років:</label>
         <input type="number" id="average-time" required>
-        
         <label for="cancer-sf">Фактор канцерогенного потенціалу (SF):</label>
         <input type="number" id="cancer-sf" required>
-        
         <button type="button" onclick="calculateCancerRisk()">Розрахувати ризик</button>
-    </form>
-    <div id="cancer-risk-result" class="tax-result"></div>
-</div>
-<div id="individual-cancer-risk-calc" class="tab-content" style="display: none;">
-  <h2>Оцінка індивідуального канцерогенного ризику</h2>
-  <form id="individual-cancer-risk-form" class="tax-form">
-      <label for="LADD">Середня добова доза протягом життя (LADD), мг/(кг*доба):</label>
-      <input type="number" id="LADD" required>
-      
-      <label for="SF">Фактор нахилу (SF), мг/(кг*доба):</label>
-      <input type="number" id="SF" required>
-      
-      <button type="button" onclick="calculateIndividualCancerRisk()">Розрахувати індивідуальний канцерогенний ризик</button>
-  </form>
-  <div id="individual-cancer-risk-result" class="tax-result"></div>
-</div> 
-<div id="combined-cancer-risk-calc" class="tab-content" style="display: none;">
-  <h2>Оцінка комбінованого канцерогенного ризику</h2>
-  
-  <form id="combined-cancer-risk-form" class="tax-form">
-    <label for="num-chemicals">Кількість хімічних речовин:</label>
-    <input type="number" id="num-chemicals" min="1" required>
-    
-    <div id="chemical-rows"></div>
-    
-    <button type="button" onclick="calculateCombinedCancerRisk()">Розрахувати комбінований канцерогенний ризик (CR_A)</button>
-  </form>
-
-  <div id="combined-cancer-risk-result" class="tax-result"></div>
-</div>
-<div id="pcr-calc" class="tab-content" style="display: none;">
-  <h2>Оцінка популяційного канцерогенного ризику (PCR)</h2>
-  
-  <form id="pcr-form" class="tax-form">
-    <label for="individual-cancer-risk">Індивідуальний канцерогенний ризик (CR):</label>
-    <input type="number" id="individual-cancer-risk" step="0.00001" required>
-
-    <label for="population-size">Чисельність популяції (POP):</label>
-    <input type="number" id="population-size" required>
-
-    <button type="button" onclick="calculatePCR()">Розрахувати популяційний канцерогений ризик (PCR)</button>
-  </form>
-  
-  <div id="pcr-result" class="tax-result"></div>
-</div>
-
-<script src="../../app/components/taxForm/calculateRisk.js"></script>
-<script src="../../app/components/taxForm/calculateNonCanceric.js"></script>
-<script src="../../app/components/table/event-listeners/num-chemicals.js"></script>
-<script src="../../app/components/taxForm/calculateCombinedCancerRisk.js"></script>
-</body>
+      </form>
+      <div id="cancer-risk-result" class="tax-result"></div>
+    </div>
+    <div id="individual-cancer-risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка індивідуального канцерогенного ризику</h2>
+      <form id="individual-cancer-risk-form" class="tax-form">
+        <label for="LADD">Середня добова доза протягом життя (LADD), мг/(кг*доба):</label>
+        <input type="number" id="LADD" required>
+        <label for="SF">Фактор нахилу (SF), мг/(кг*доба):</label>
+        <input type="number" id="SF" required>
+        <button type="button" onclick="calculateIndividualCancerRisk()">Розрахувати індивідуальний канцерогенний ризик</button>
+      </form>
+      <div id="individual-cancer-risk-result" class="tax-result"></div>
+    </div>
+    <div id="combined-cancer-risk-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка комбінованого канцерогенного ризику</h2>
+      <form id="combined-cancer-risk-form" class="tax-form">
+        <label for="num-chemicals">Кількість хімічних речовин:</label>
+        <input type="number" id="num-chemicals" min="1" required>
+        <div id="chemical-rows"></div>
+        <button type="button" onclick="calculateCombinedCancerRisk()">Розрахувати комбінований канцерогенний ризик (CR_A)</button>
+      </form>
+      <div id="combined-cancer-risk-result" class="tax-result"></div>
+    </div>
+    <div id="pcr-calc" class="tab-content" style="display: none;">
+      <h2>Оцінка популяційного канцерогенного ризику (PCR)</h2>
+      <form id="pcr-form" class="tax-form">
+        <label for="individual-cancer-risk">Індивідуальний канцерогенний ризик (CR):</label>
+        <input type="number" id="individual-cancer-risk" step="0.00001" required>
+        <label for="population-size">Чисельність популяції (POP):</label>
+        <input type="number" id="population-size" required>
+        <button type="button" onclick="calculatePCR()">Розрахувати популяційний канцерогений ризик (PCR)</button>
+      </form>
+      <div id="pcr-result" class="tax-result"></div>
+    </div>
+    <script src="../../app/components/taxForm/calculateRisk.js"></script>
+    <script src="../../app/components/table/event-listeners/num-chemicals.js"></script>
+    <script src="../../app/components/taxForm/calculateCombinedCancerRisk.js"></script>
+    <script src="../../app/components/taxForm/calculateNonCanceric.js"></script>
+  </body>
 </html>
